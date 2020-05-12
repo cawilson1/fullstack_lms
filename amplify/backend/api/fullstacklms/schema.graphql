@@ -1,0 +1,18 @@
+type Resource @model {
+  id: ID!
+  instructor: String!
+  data: String
+  uuid: String
+  date: String
+  urlTitle: String
+  urlDescription: String
+  url: String
+}
+
+type Post @model {
+  id: ID!
+  author: String!
+  data: String!
+  uuid: String
+  date: String!
+}
