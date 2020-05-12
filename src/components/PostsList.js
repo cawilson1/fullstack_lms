@@ -1,6 +1,6 @@
 import React from "react";
 
-const PostList = () => {
+const PostsList = () => {
   return (
     <>
       <h3> List of Posts:</h3>
@@ -10,4 +10,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default PostsList;
