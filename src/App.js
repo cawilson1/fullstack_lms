@@ -14,8 +14,8 @@ import Post from "./components/Post";
 import PostInput from "./components/PostInput";
 import PostsList from "./components/PostsList";
 import Resource from "./components/Resource";
-import ResourceInputContainer from "./containers/resourceInputContainer";
-import ResourceList from "./components/ResourceList";
+import ResourceInputContainer from "./containers/ResourceInputContainer";
+import ResourcesListContainer from "./containers/ResourcesListContainer";
 
 function App() {
   return (
@@ -26,8 +26,8 @@ function App() {
         <Profile path="profile" />
         <EditProfile path="profile_edit" />
         {/* </Profile> */}
-        <ResourceList path="/" />
-        <Resource path="resource" />
+        <ResourcesListContainer path="/" />
+        {/* <Resource path="resource" /> */}
         <ResourceInputContainer path="resource_input" />
         {/* </ResourceList> */}
         <PostsList path="post_list" />
