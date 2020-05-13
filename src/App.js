@@ -14,7 +14,7 @@ import Post from "./components/Post";
 import PostInput from "./components/PostInput";
 import PostsList from "./components/PostsList";
 import Resource from "./components/Resource";
-import ResourceInput from "./components/ResourceInput";
+import ResourceInputContainer from "./containers/resourceInputContainer";
 import ResourceList from "./components/ResourceList";
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
         {/* </Profile> */}
         <ResourceList path="/" />
         <Resource path="resource" />
-        <ResourceInput path="resource_input" />
+        <ResourceInputContainer path="resource_input" />
         {/* </ResourceList> */}
         <PostsList path="post_list" />
         <Post path="post" />
