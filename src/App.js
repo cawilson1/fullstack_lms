@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Router, Link } from "@reach/router";
-// import logger from "redux-logger";
-// import { applyMiddleware, createStore } from "redux";
+// import { API, graphqlOperation } from "aws-amplify";
+// import { createResource } from "./graphql/mutations";
 
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
