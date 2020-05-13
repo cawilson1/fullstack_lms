@@ -1,6 +1,10 @@
 import React from "react";
 import "./App.css";
 import { Router, Link } from "@reach/router";
+// import logger from "redux-logger";
+// import { applyMiddleware, createStore } from "redux";
+
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 import Header from "./components/Header";
 import Nav from "./components/Nav";
@@ -35,4 +39,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);

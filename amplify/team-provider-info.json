@@ -1,0 +1,20 @@
+{
+    "finalenv": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-fullstacklms-finalenv-152026-authRole",
+            "UnauthRoleArn": "arn:aws:iam::226507624813:role/amplify-fullstacklms-finalenv-152026-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::226507624813:role/amplify-fullstacklms-finalenv-152026-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-fullstacklms-finalenv-152026-deployment",
+            "UnauthRoleName": "amplify-fullstacklms-finalenv-152026-unauthRole",
+            "StackName": "amplify-fullstacklms-finalenv-152026",
+            "StackId": "arn:aws:cloudformation:us-east-1:226507624813:stack/amplify-fullstacklms-finalenv-152026/9aa55870-9485-11ea-9de3-12342204bca9",
+            "AmplifyAppId": "d2fqu0cpjh52hf"
+        },
+        "categories": {
+            "auth": {
+                "fullstacklmsc4b5d36e": {}
+            }
+        }
+    }
+}
