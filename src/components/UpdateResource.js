@@ -20,28 +20,38 @@ const UpdateResource = ({
 }) => {
   const classes = useStyles();
 
+  let instructor, data, uuid, url, urlTitle, urlDescription;
+
+  //subscription to handle render updated
+
   return (
     <div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          boundUpdateResource({
-            id: resource.id,
-            instructor: resource.instructor.value,
-            data: resource.data.value,
-            uuid:
-              resource.uuid.value === "" ? resource.uuid : resource.uuid.value,
-            url: resource.url.value === "" ? resource.url : resource.url.value,
-            urlTitle:
-              resource.urlTitle.value === ""
-                ? resource.urlTitle
-                : resource.urlTitle.value,
-            urlDescription:
-              resource.urlDescription.value === ""
-                ? resource.urlDescription
-                : resource.urlDescription.value,
-          });
-          //   setIsToggleUpdate(!isToggleUpdate);
+          console.log(
+            "From ResourceInput",
+            "a",
+            resource.instructor.value,
+            "b",
+            instructor.value
+          );
+
+          boundUpdateResource &&
+            boundUpdateResource({
+              id: resource.id,
+              instructor: instructor.value,
+              data: data.value,
+              uuid: uuid.value === "" ? resource.uuid : uuid.value,
+              url: url.value === "" ? resource.url : url.value,
+              urlTitle:
+                urlTitle.value === "" ? resource.urlTitle : urlTitle.value,
+              urlDescription:
+                urlDescription.value === ""
+                  ? resource.urlDescription
+                  : urlDescription.value,
+            });
+          setIsToggleUpdate(!isToggleUpdate);
         }}
       >
         <Typography className={classes.typography}>
@@ -49,37 +59,37 @@ const UpdateResource = ({
             id="instructor"
             type="text"
             defaultValue={resource.instructor}
-            ref={(node) => (resource.instructor = node)}
+            ref={(node) => (instructor = node)}
           />
           <textarea
             id="data"
             type="text"
             defaultValue={resource.data}
-            ref={(node) => (resource.data = node)}
+            ref={(node) => (data = node)}
           ></textarea>
           <input
             id="uuid"
             type="text"
             defaultValue={resource.uuid}
-            ref={(node) => (resource.uuid = node)}
+            ref={(node) => (uuid = node)}
           />
           <input
             id="url"
             type="text"
             defaultValue={resource.url}
-            ref={(node) => (resource.url = node)}
+            ref={(node) => (url = node)}
           />
           <input
             id="urlTitle"
             type="text"
             defaultValue={resource.urlTitle}
-            ref={(node) => (resource.urlTitle = node)}
+            ref={(node) => (urlTitle = node)}
           />
           <input
             id="urlDescription"
             type="text"
             defaultValue={resource.urlDescription}
-            ref={(node) => (resource.urlDescription = node)}
+            ref={(node) => (urlDescription = node)}
           />
           <Button
             // aria-describedby={id}

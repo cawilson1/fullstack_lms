@@ -2,7 +2,8 @@ import { connect } from "react-redux";
 import { updateResourceInjector } from "../actions/updateResourceActions";
 import UpdateResource from "../components/UpdateResource";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+  console.log("OwnProps", ownProps);
   return {
     instructor: state.updateResourceReducer.instructor,
     data: state.updateResourceReducer.data,
@@ -11,6 +12,8 @@ const mapStateToProps = (state) => {
     urlDescription: state.updateResourceReducer.urlDescription,
     urlTitle: state.updateResourceReducer.urlTitle,
     status: state.updateResourceReducer.type,
+    isToggleUpdate: ownProps.isToggleUpdate,
+    setIsToggleUpdate: ownProps.setIsToggleUpdate,
   };
 };
 
