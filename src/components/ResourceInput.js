@@ -1,5 +1,5 @@
 import React from "react";
-import { findByLabelText } from "@testing-library/react";
+// import { findByLabelText } from "@testing-library/react";
 
 const ResourceInput = ({
   boundCreateResource,
@@ -11,6 +11,9 @@ const ResourceInput = ({
   urlDescription,
   status,
 }) => {
+  //local state for isChecked____ (type of checkbox)
+  //ternary to swap between the three with varying fields visible/editable
+
   return (
     <form
       style={styles.formStyle}

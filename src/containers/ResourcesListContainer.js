@@ -1,5 +1,10 @@
 import { connect } from "react-redux";
 import { getResourcesInjector } from "../actions/getResourceActions";
+import {
+  updateResourceRequest,
+  updateResourceInjector,
+} from "../actions/updateResourceActions";
+
 import ResourceList from "../components/ResourceList";
 
 import { deleteResourceInjector } from "../actions/deleteResourceActions";

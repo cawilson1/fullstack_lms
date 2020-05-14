@@ -3,7 +3,7 @@ import { createResourceInjector } from "../actions/createResourceActions";
 import ResourceInput from "../components/ResourceInput";
 
 const mapStateToProps = (state) => {
-  console.log("mapStateToProp", state);
+  // console.log("mapStateToProp", state);
   return {
     instructor: state.createResourceReducer.instructor,
     data: state.createResourceReducer.data,

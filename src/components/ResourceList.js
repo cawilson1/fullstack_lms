@@ -8,13 +8,18 @@ import Resource from "./Resource";
 const ResourceList = ({
   boundAttemptDeleteResource,
   boundAttemptGetResources,
+  boundUpdateResourceRequest,
   resources,
   status,
 }) => {
   useEffect(() => {
     boundAttemptGetResources();
   }, []);
+
   return (
+    //if (status === UPDATE_RESOURCE_REQUEST) {
+    // <UpdateResource />
+    //}
     <div>
       {resources.map((resource) => {
         // console.log("resources", resources, "instructor", resource.instructor);
@@ -23,6 +28,7 @@ const ResourceList = ({
             <Resource
               resource={resource}
               boundAttemptDeleteResource={boundAttemptDeleteResource}
+              boundUpdateResourceRequest={boundUpdateResourceRequest}
             />
           </div>
         ) : (
