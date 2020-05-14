@@ -1,15 +1,16 @@
-import { API, graphqlOperation, Storage } from "aws-amplify";
+import { Storage } from "aws-amplify";
 import { S3Text, S3Image } from "aws-amplify-react";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"; //to component?
 
 export const CREATE_S3_RESOURCE_SUCCESS = "CREATE_RESOURCE_SUCCESS";
 export const CREATE_S3_RESOURCE_ERROR = "CREATE_RESOURCE_ERROR";
 export const CREATE_S3_RESOURCE_REQUEST = "CREATE_RESOURCE_REQUEST";
 
-const createS3ResourceRequest = (resource) => {
+const createS3ResourceRequest = (uuid, file) => {
   return {
     type: CREATE_S3_RESOURCE_REQUEST,
-    resource,
+    uuid,
+    file,
   };
 };
 
@@ -25,14 +26,12 @@ const createS3ResourceError = () => {
   };
 };
 
-const attemptCreateS3Resource = async (dispatch, resource) => {
-  dispatch(createS3ResourceRequest(resource));
+const attemptCreateS3Resource = async (dispatch, uuid, file) => {
+  dispatch(createS3ResourceRequest(s3resource));
   try {
-    const request = await API.graphql(
-      graphqlOperation(createResource, {
-        input: resource,
-      })
-    );
+    const request = Storage.put("test/" + uuid, file, {
+      contentType: "image",
+    });
     dispatch(createS3ResourceSuccess());
   } catch (error) {
     dispatch(createS3ResourceError());
@@ -41,7 +40,7 @@ const attemptCreateS3Resource = async (dispatch, resource) => {
 };
 
 export const createS3ResourceInjector = (dispatch) => {
-  return (resource) => {
-    attemptCreateS3Resource(dispatch, resource);
+  return (uuid, file) => {
+    attemptCreateS3Resource(dispatch, uuid, file);
   };
 };
