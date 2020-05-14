@@ -3,7 +3,6 @@ type Resource @model {
   instructor: String!
   data: String
   uuid: String
-  date: String
   urlTitle: String
   urlDescription: String
   url: String
@@ -14,5 +13,4 @@ type Post @model {
   author: String!
   data: String!
   uuid: String
-  date: String!
 }

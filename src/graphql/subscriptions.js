@@ -8,7 +8,6 @@ export const onCreateResource = /* GraphQL */ `
       instructor
       data
       uuid
-      date
       urlTitle
       urlDescription
       url
@@ -22,7 +21,6 @@ export const onUpdateResource = /* GraphQL */ `
       instructor
       data
       uuid
-      date
       urlTitle
       urlDescription
       url
@@ -36,10 +34,39 @@ export const onDeleteResource = /* GraphQL */ `
       instructor
       data
       uuid
-      date
       urlTitle
       urlDescription
       url
+    }
+  }
+`;
+export const onCreatePost = /* GraphQL */ `
+  subscription OnCreatePost {
+    onCreatePost {
+      id
+      author
+      data
+      uuid
+    }
+  }
+`;
+export const onUpdatePost = /* GraphQL */ `
+  subscription OnUpdatePost {
+    onUpdatePost {
+      id
+      author
+      data
+      uuid
+    }
+  }
+`;
+export const onDeletePost = /* GraphQL */ `
+  subscription OnDeletePost {
+    onDeletePost {
+      id
+      author
+      data
+      uuid
     }
   }
 `;
