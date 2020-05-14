@@ -1,23 +1,9 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { createResource } from "../graphql/mutations";
 
-const CREATE_RESOURCE_SUCCESS = "CREATE_RESOURCE_SUCCESS";
-const CREATE_RESOURCE_ERROR = "CREATE_RESOURCE_ERROR";
-const CREATE_RESOURCE_REQUEST = "CREATE_RESOURCE_REQUEST";
-
-const UPDATE_RESOURCE_SUCCESS = "UPDATE_RESOURCE_SUCCESS";
-const UPDATE_RESOURCE_ERROR = "UPDATE_RESOURCE_ERROR";
-const UPDATE_RESOURCE_REQUEST = "UPDATE_RESOURCE_REQUEST";
-
-const DELETE_RESOURCE_SUCCESS = "DELETE_RESOURCE_SUCCESS";
-const DELETE_RESOURCE_ERROR = "DELETE_RESOURCE_ERROR";
-const DELETE_RESOURCE_REQUEST = "DELETE_RESOURCE_REQUEST";
-
-const SHOW_RESOURCES = "SHOW_RESOURCES";
-
-const GET_RESOURCES_REQUEST = "GET_RESOURCES_REQUEST";
-const GET_RESOURCES_SUCCESS = "GET_RESOURCES_SUCCESS";
-const GET_RESOURCES_ERROR = "GET_RESOURCES_ERROR";
+export const CREATE_RESOURCE_SUCCESS = "CREATE_RESOURCE_SUCCESS";
+export const CREATE_RESOURCE_ERROR = "CREATE_RESOURCE_ERROR";
+export const CREATE_RESOURCE_REQUEST = "CREATE_RESOURCE_REQUEST";
 
 const createResourceRequest = (resource) => {
   return {
@@ -41,7 +27,11 @@ const createResourceError = () => {
 const attemptCreateResource = async (dispatch, resource) => {
   dispatch(createResourceRequest(resource));
   try {
-    const request = await API.graphqlOperation(createResource, resource);
+    const request = await API.graphql(
+      graphqlOperation(createResource, {
+        input: resource,
+      })
+    );
     dispatch(createResourceSuccess());
   } catch (error) {
     dispatch(createResourceError());
@@ -54,6 +44,18 @@ export const createResourceInjector = (dispatch) => {
     attemptCreateResource(dispatch, resource);
   };
 };
+
+// useEffect(() => {
+//   const testCreate = async () => {
+//     const request = await API.graphql(
+//       graphqlOperation(createResource, {
+//         input: { instructor: "Casey" },
+//       })
+//     );
+//     console.log(request);
+//   };
+//   testCreate();
+// }, []);
 
 // const showResources = (resource) => {
 //   return {

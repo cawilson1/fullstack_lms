@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Router, Link } from "@reach/router";
-// import logger from "redux-logger";
-// import { applyMiddleware, createStore } from "redux";
+// import { API, graphqlOperation } from "aws-amplify";
+// import { createResource } from "./graphql/mutations";
 
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
@@ -14,8 +14,8 @@ import Post from "./components/Post";
 import PostInput from "./components/PostInput";
 import PostsList from "./components/PostsList";
 import Resource from "./components/Resource";
-import ResourceInput from "./components/ResourceInput";
-import ResourceList from "./components/ResourceList";
+import ResourceInputContainer from "./containers/ResourceInputContainer";
+import ResourcesListContainer from "./containers/ResourcesListContainer";
 
 function App() {
   return (
@@ -26,9 +26,9 @@ function App() {
         <Profile path="profile" />
         <EditProfile path="profile_edit" />
         {/* </Profile> */}
-        <ResourceList path="/" />
-        <Resource path="resource" />
-        <ResourceInput path="resource_input" />
+        <ResourcesListContainer path="/" />
+        {/* <Resource path="resource" /> */}
+        <ResourceInputContainer path="resource_input" />
         {/* </ResourceList> */}
         <PostsList path="post_list" />
         <Post path="post" />
