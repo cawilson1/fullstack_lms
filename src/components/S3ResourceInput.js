@@ -1,13 +1,6 @@
-import React, { useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React from "react";
 
 const S3ResourceInput = ({ setFile }) => {
-  //   const createUuid = () => {
-  //     const uuid = uuidv4();
-  //     console.log("uuid", uuid)
-  //     return uuid;
-  //   };
-
   return (
     <input
       type="file"

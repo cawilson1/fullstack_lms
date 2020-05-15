@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import S3ResourceInput from "../components/S3ResourceInput";
+import { v4 as uuidv4 } from "uuid";
 
 const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
-  // const [uuid, setUuid] = useState("");
   const [file, setFile] = useState("");
+  const uuid = uuidv4() + ".png";
 
   // console.log("uuid");
-  let instructorInput,
-    dataInput,
-    uuidInput,
-    urlInput,
-    urlTitleInput,
-    urlDescriptionInput;
+  let instructorInput, dataInput, urlInput, urlTitleInput, urlDescriptionInput;
 
   return (
     <>
@@ -23,7 +19,7 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
             boundCreateResource({
               instructor: instructorInput.value,
               data: dataInput.value,
-              uuid: "",
+              uuid: uuid,
               url: urlInput.value === "" ? null : urlInput.value,
               urlTitle: urlTitleInput.value === "" ? null : urlTitleInput.value,
               urlDescription:
@@ -34,6 +30,7 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
           boundS3CreateResource &&
             boundS3CreateResource({
               file: file,
+              uuid: uuid,
             });
         }}
       >
@@ -50,12 +47,6 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
           placeholder="Input data"
           ref={(node) => (dataInput = node)}
         ></textarea>
-        <input
-          id="uuid"
-          type="text"
-          placeholder="Input uuid"
-          ref={(node) => (uuidInput = node)}
-        />
         <input
           id="url"
           type="text"
