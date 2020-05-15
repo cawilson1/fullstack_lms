@@ -29,14 +29,6 @@ const UpdateResource = ({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(
-            "From ResourceInput",
-            "a",
-            resource.instructor.value,
-            "b",
-            instructor.value
-          );
-
           boundUpdateResource &&
             boundUpdateResource({
               id: resource.id,
