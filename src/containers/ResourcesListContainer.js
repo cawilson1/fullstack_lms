@@ -1,6 +1,13 @@
 import { connect } from "react-redux";
 import { getResourcesInjector } from "../actions/getResourceActions";
+import {
+  updateResourceRequest,
+  updateResourceInjector,
+} from "../actions/updateResourceActions";
+
 import ResourceList from "../components/ResourceList";
+
+import { deleteResourceInjector } from "../actions/deleteResourceActions";
 
 const mapStateToProps = (state) => {
   return {
@@ -12,6 +19,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     boundAttemptGetResources: getResourcesInjector(dispatch),
+    boundAttemptDeleteResource: deleteResourceInjector(dispatch),
   };
 };
 

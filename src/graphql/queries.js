@@ -8,7 +8,6 @@ export const getResource = /* GraphQL */ `
       instructor
       data
       uuid
-      date
       urlTitle
       urlDescription
       url
@@ -27,10 +26,36 @@ export const listResources = /* GraphQL */ `
         instructor
         data
         uuid
-        date
         urlTitle
         urlDescription
         url
+      }
+      nextToken
+    }
+  }
+`;
+export const getPost = /* GraphQL */ `
+  query GetPost($id: ID!) {
+    getPost(id: $id) {
+      id
+      author
+      data
+      uuid
+    }
+  }
+`;
+export const listPosts = /* GraphQL */ `
+  query ListPosts(
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        author
+        data
+        uuid
       }
       nextToken
     }

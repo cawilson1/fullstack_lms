@@ -44,29 +44,3 @@ export const createResourceInjector = (dispatch) => {
     attemptCreateResource(dispatch, resource);
   };
 };
-
-// useEffect(() => {
-//   const testCreate = async () => {
-//     const request = await API.graphql(
-//       graphqlOperation(createResource, {
-//         input: { instructor: "Casey" },
-//       })
-//     );
-//     console.log(request);
-//   };
-//   testCreate();
-// }, []);
-
-// const showResources = (resource) => {
-//   return {
-//     type: SHOW_RESOURCES,
-//     resource: resource,
-//   };
-// };
-
-// const getResources = (id) => {
-//   return {
-//     type: GET_RESOURCES,
-//     id,
-//   };
-// };
