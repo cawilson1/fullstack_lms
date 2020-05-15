@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import S3ResourceInputContainer from "../containers/S3ResourceInputContainer";
+import S3ResourceInput from "../components/S3ResourceInput";
 
-const ResourceInput = ({ boundCreateResource }) => {
+const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
   // const [uuid, setUuid] = useState("");
+  const [file, setFile] = useState("");
 
   // console.log("uuid");
   let instructorInput,
@@ -14,7 +15,6 @@ const ResourceInput = ({ boundCreateResource }) => {
 
   return (
     <>
-      <S3ResourceInputContainer />
       <form
         style={styles.formStyle}
         onSubmit={(e) => {
@@ -30,6 +30,10 @@ const ResourceInput = ({ boundCreateResource }) => {
                 urlDescriptionInput.value === ""
                   ? null
                   : urlDescriptionInput.value,
+            });
+          boundS3CreateResource &&
+            boundS3CreateResource({
+              file: file,
             });
         }}
       >
@@ -71,6 +75,7 @@ const ResourceInput = ({ boundCreateResource }) => {
           ref={(node) => (urlDescriptionInput = node)}
         />
         <input type="checkbox"></input>
+        <S3ResourceInput setFile={setFile} />
         <button type="submit">Submit</button>
       </form>
     </>
