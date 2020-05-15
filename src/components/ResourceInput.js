@@ -6,7 +6,6 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
   const [file, setFile] = useState("");
   const uuid = uuidv4() + ".png";
 
-  // console.log("uuid");
   let instructorInput, dataInput, urlInput, urlTitleInput, urlDescriptionInput;
 
   return (

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import UpdateResourceContainer from "../containers/UpdateResourceContainer";
+import { S3Image } from "aws-amplify-react";
+import ResourcesListContainer from "../containers/ResourcesListContainer";
 
-const Resource = ({ resource, boundAttemptDeleteResource }) => {
+const Resource = ({ resource, boundAttemptDeleteResource, s3Resource }) => {
   const [isToggleUpdate, setIsToggleUpdate] = useState(false);
   return (
     <div>
