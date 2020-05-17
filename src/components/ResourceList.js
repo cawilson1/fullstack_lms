@@ -9,11 +9,13 @@ const ResourceList = ({
   boundAttemptDeleteResource,
   boundAttemptGetResources,
   boundUpdateResourceRequest,
+  boundAttemptGetS3Resources,
   resources,
-  status,
+  s3Resources,
 }) => {
   useEffect(() => {
     boundAttemptGetResources();
+    boundAttemptGetS3Resources();
   }, []);
 
   return (
@@ -27,6 +29,7 @@ const ResourceList = ({
           <div key={resource.id}>
             <Resource
               resource={resource}
+              s3Resource={resource.uuid ? s3Resources.uuid : null}
               boundAttemptDeleteResource={boundAttemptDeleteResource}
               boundUpdateResourceRequest={boundUpdateResourceRequest}
             />

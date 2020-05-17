@@ -22,8 +22,8 @@ export const createS3ResourceReducer = (state = initialState, action) => {
     case CREATE_S3_RESOURCE_SUCCESS:
       return {
         ...state,
-        uuid: null,
-        file: null,
+        // uuid: null,
+        // file: null,
         status: action.type,
       };
     case CREATE_S3_RESOURCE_ERROR:

@@ -1,28 +1,15 @@
 import { connect } from "react-redux";
 import { createResourceInjector } from "../actions/createResourceActions";
+import { createS3ResourceInjector } from "../actions/createS3ResourceActions";
 import ResourceInput from "../components/ResourceInput";
-
-const mapStateToProps = (state) => {
-  return {
-    instructor: state.createResourceReducer.instructor,
-    data: state.createResourceReducer.data,
-    uuid: state.createResourceReducer.uuid,
-    url: state.createResourceReducer.url,
-    urlDescription: state.createResourceReducer.urlDescription,
-    urlTitle: state.createResourceReducer.urlTitle,
-    status: state.createResourceReducer.type,
-  };
-};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     boundCreateResource: createResourceInjector(dispatch),
+    boundS3CreateResource: createS3ResourceInjector(dispatch),
   };
 };
 
-const ResourceInputContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ResourceInput);
+const ResourceInputContainer = connect(null, mapDispatchToProps)(ResourceInput);
 
 export default ResourceInputContainer;

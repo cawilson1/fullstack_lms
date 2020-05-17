@@ -3,7 +3,7 @@ import "./App.css";
 import { Router, Link } from "@reach/router";
 // import { API, graphqlOperation } from "aws-amplify";
 // import { createResource } from "./graphql/mutations";
-
+import { Auth } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
 import Header from "./components/Header";
@@ -18,6 +18,7 @@ import ResourceInputContainer from "./containers/ResourceInputContainer";
 import ResourcesListContainer from "./containers/ResourcesListContainer";
 
 function App() {
+  console.log("auth", Auth, "current auth user", Auth.user);
   return (
     <div className="App">
       <Header />
