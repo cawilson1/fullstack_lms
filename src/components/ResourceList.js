@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Resource from "./Resource";
+import { Storage } from "aws-amplify";
 
 // ----TO DO----
 // [ ] GET Resource/Links from Dynamo
@@ -11,27 +12,36 @@ const ResourceList = ({
   boundUpdateResourceRequest,
   boundAttemptGetS3Resources,
   resources,
-  s3Resources,
+  s3Resource,
+  s3Uuid,
 }) => {
+  const [testS3, setTestS3] = useState("");
+
   useEffect(() => {
     boundAttemptGetResources();
-    boundAttemptGetS3Resources();
+    // let testS3get = Storage.get("test/a58e2778-ee88-4833-a6e9-df45d3a0669d.png")
+    //   .then((result) => console.log("GetS3 Result", result))
+    //   .catch((err) => console.log(err));
   }, []);
+
+  // console.log("testS3 response", testS3);
 
   return (
     //if (status === UPDATE_RESOURCE_REQUEST) {
     // <UpdateResource />
     //}
     <div>
+      <img src={testS3}></img>
       {resources.map((resource) => {
-        // console.log("resources", resources, "instructor", resource.instructor);
         return resource ? (
           <div key={resource.id}>
             <Resource
               resource={resource}
-              s3Resource={resource.uuid ? s3Resources.uuid : null}
+              s3Resource={s3Resource}
+              s3Uuid={s3Uuid}
               boundAttemptDeleteResource={boundAttemptDeleteResource}
               boundUpdateResourceRequest={boundUpdateResourceRequest}
+              boundAttemptGetS3Resources={boundAttemptGetS3Resources}
             />
           </div>
         ) : (

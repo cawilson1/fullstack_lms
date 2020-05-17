@@ -27,6 +27,10 @@
 		"LMS": {
 			"service": "S3",
 			"providerPlugin": "awscloudformation"
+		},
+		"lmsfinalproj": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
 		}
 	}
 }

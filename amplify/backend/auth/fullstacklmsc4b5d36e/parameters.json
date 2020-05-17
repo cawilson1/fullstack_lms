@@ -1,6 +1,6 @@
 {
     "identityPoolName": "fullstacklmsc4b5d36e_identitypool_c4b5d36e",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "fullstc4b5d36e",
     "userPoolName": "fullstacklmsc4b5d36e_userpool_c4b5d36e",
     "autoVerifiedAttributes": [

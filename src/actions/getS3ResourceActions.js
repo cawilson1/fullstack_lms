@@ -10,9 +10,10 @@ const getS3ResourceRequest = () => {
   };
 };
 
-const getS3ResourceSuccess = () => {
+const getS3ResourceSuccess = (response) => {
   return {
     type: GET_S3_RESOURCE_SUCCESS,
+    uuid: response,
   };
 };
 
@@ -22,14 +23,15 @@ const getS3ResourceError = () => {
   };
 };
 
-const getS3ResourceAttempt = async (dispatch) => {
-  dispatch(getS3ResourceRequest());
+const getS3ResourceAttempt = async (dispatch, uuid) => {
+  dispatch(getS3ResourceRequest(uuid));
   try {
-    const response = await Storage.list("test/", {
-      level: "public",
+    const response = await Storage.get("test/" + uuid, {
+      // level: "public",
       contentType: "image/png",
     });
-    dispatch(getS3ResourceSuccess());
+    console.log("getS3ActionsResponse", response);
+    dispatch(getS3ResourceSuccess(response));
   } catch (error) {
     dispatch(getS3ResourceError());
     console.error(error);
@@ -37,5 +39,5 @@ const getS3ResourceAttempt = async (dispatch) => {
 };
 
 export const getS3ResourceInjector = (dispatch) => {
-  return () => getS3ResourceAttempt(dispatch);
+  return (uuid) => getS3ResourceAttempt(dispatch, uuid);
 };
