@@ -11,7 +11,6 @@ const mapStateToProps = (state) => {
     resources: state.getResourcesReducer.resources,
     status: state.getResourcesReducer.status,
     s3Resource: state.getS3ResourceReducer.s3Resource,
-    s3Uuid: state.getS3ResourceReducer.uuid,
     s3Status: state.getS3ResourceReducer.status,
   };
 };
