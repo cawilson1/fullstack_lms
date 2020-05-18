@@ -1,10 +1,9 @@
 import { connect } from "react-redux";
 import { getResourcesInjector } from "../actions/getResourceActions";
 import { getS3ResourceInjector } from "../actions/getS3ResourceActions";
+import { deleteResourceInjector } from "../actions/deleteResourceActions";
 
 import ResourceList from "../components/ResourceList";
-
-import { deleteResourceInjector } from "../actions/deleteResourceActions";
 
 const mapStateToProps = (state) => {
   return {

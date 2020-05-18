@@ -1,5 +1,8 @@
 import { connect } from "react-redux";
+
 import { getPostsInjector } from "../actions/getPostActions";
+import { deletePostInjector } from "../actions/deletePostActions";
+
 import PostsList from "../components/PostsList";
 
 const mapStateToProps = (state) => {
@@ -12,6 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     boundAttemptGetPosts: getPostsInjector(dispatch),
+    boundAttemptDeletePost: deletePostInjector(dispatch),
   };
 };
 

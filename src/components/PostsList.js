@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import Post from "./Post";
 
-const PostsList = ({ boundAttemptGetPosts, posts }) => {
+const PostsList = ({
+  boundAttemptGetPosts,
+  boundUpdatePost,
+  boundAttemptDeletePost,
+  posts,
+}) => {
   console.log("From PostsList Component", posts);
 
   useEffect(() => {
@@ -13,7 +18,11 @@ const PostsList = ({ boundAttemptGetPosts, posts }) => {
       {posts.map((post) => {
         return post ? (
           <div key={post.id}>
-            <Post post={post} />
+            <Post
+              post={post}
+              boundUpdatePost={boundUpdatePost}
+              boundAttemptDeletePost={boundAttemptDeletePost}
+            />
           </div>
         ) : (
           "You haven't created any posts yet"
