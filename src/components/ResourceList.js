@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import Resource from "./Resource";
 import { Storage } from "aws-amplify";
 
-// ----TO DO----
-// [ ] GET Resource/Links from Dynamo
-// [ ] GET images/docs from S3
-
 const ResourceList = ({
   boundAttemptDeleteResource,
   boundAttemptGetResources,
@@ -14,8 +10,6 @@ const ResourceList = ({
   resources,
   s3Resource,
 }) => {
-  const [testS3, setTestS3] = useState("");
-
   useEffect(() => {
     async function fetch() {
       const alpha = await boundAttemptGetS3Resources();
