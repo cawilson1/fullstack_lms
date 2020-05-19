@@ -27,6 +27,7 @@ const UpdateResource = ({
   return (
     <div>
       <form
+        style={styles.formStyle}
         onSubmit={(e) => {
           e.preventDefault();
           boundUpdateResource &&
@@ -60,12 +61,6 @@ const UpdateResource = ({
             ref={(node) => (data = node)}
           ></textarea>
           <input
-            id="uuid"
-            type="text"
-            defaultValue={resource.uuid}
-            ref={(node) => (uuid = node)}
-          />
-          <input
             id="url"
             type="text"
             defaultValue={resource.url}
@@ -83,6 +78,12 @@ const UpdateResource = ({
             defaultValue={resource.urlDescription}
             ref={(node) => (urlDescription = node)}
           />
+          <input
+            id="uuid"
+            type="text"
+            defaultValue={resource.uuid}
+            ref={(node) => (uuid = node)}
+          />
           <Button
             // aria-describedby={id}
             variant="contained"
@@ -98,3 +99,11 @@ const UpdateResource = ({
 };
 
 export default UpdateResource;
+
+const styles = {
+  formStyle: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+};

@@ -30,8 +30,6 @@ const Resource = ({
     }
   }, []);
 
-  console.log(hasS3Resource, "Hello S3 outside UE", s3);
-
   return (
     <div>
       {isToggleUpdate ? (
