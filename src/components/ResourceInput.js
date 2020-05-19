@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import S3ResourceInput from "../components/S3ResourceInput";
 import { v4 as uuidv4 } from "uuid";
 
+import { navigate } from "@reach/router";
+
 const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
   const [file, setFile] = useState("");
   const uuid = uuidv4() + ".png";
@@ -18,7 +20,7 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
             boundCreateResource({
               instructor: instructorInput.value,
               data: dataInput.value,
-              uuid: uuid,
+              uuid: file ? uuid : null,
               url: urlInput.value === "" ? null : urlInput.value,
               urlTitle: urlTitleInput.value === "" ? null : urlTitleInput.value,
               urlDescription:
@@ -26,11 +28,14 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
                   ? null
                   : urlDescriptionInput.value,
             });
-          boundS3CreateResource &&
-            boundS3CreateResource({
-              file: file,
-              uuid: uuid,
-            });
+          if (file !== "") {
+            boundS3CreateResource &&
+              boundS3CreateResource({
+                file: file,
+                uuid: uuid,
+              });
+          }
+          navigate("/");
         }}
       >
         <h3>Resource Input Here</h3>

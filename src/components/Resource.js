@@ -2,14 +2,35 @@ import React, { useState, useEffect } from "react";
 import UpdateResourceContainer from "../containers/UpdateResourceContainer";
 import { S3Image } from "aws-amplify-react";
 
-const Resource = ({ resource, boundAttemptDeleteResource, s3Resource }) => {
+const Resource = ({
+  resource,
+  boundAttemptDeleteResource,
+  boundAttemptDeleteS3Resource,
+  s3Resources,
+}) => {
   const [isToggleUpdate, setIsToggleUpdate] = useState(false);
+  const [hasS3Resource, setHasS3Resource] = useState(false);
+  const [s3, setS3] = useState("");
 
-  const matchKey = (s3Resource) => {
-    return s3Resource.key === "test/" + resource.uuid;
-  };
+  function removeResource(id, key = "") {
+    if (hasS3Resource) {
+      boundAttemptDeleteResource(id);
+      boundAttemptDeleteS3Resource(key);
+    } else boundAttemptDeleteResource(id);
+  }
 
-  const matchedTheKeys = s3Resource.filter(matchKey);
+  useEffect(() => {
+    const matchKey = (s3Resource) => {
+      return s3Resource.key === "test/" + resource.uuid; //t or f
+    };
+    const matchedToS3 = s3Resources.filter(matchKey); //either empty [] or [{key}}
+    if (matchedToS3[0]) {
+      setHasS3Resource(true);
+      setS3(matchedToS3[0].key);
+    }
+  }, []);
+
+  console.log(hasS3Resource, "Hello S3 outside UE", s3);
 
   return (
     <div>
@@ -26,18 +47,24 @@ const Resource = ({ resource, boundAttemptDeleteResource, s3Resource }) => {
           <p>{resource.data}</p>
           <p>{resource.createdAt}</p>
           <div>
-            {matchedTheKeys[0] ? (
+            {hasS3Resource ? (
               <S3Image
                 theme={{ photoImg: { width: 250, height: 200 } }}
-                key={matchedTheKeys[0].key}
-                imgKey={matchedTheKeys[0].key}
+                key={s3}
+                imgKey={s3}
                 level={"public"}
               />
             ) : (
               <></>
             )}
           </div>
-          <button onClick={() => boundAttemptDeleteResource(resource.id)}>
+          <button
+            onClick={() =>
+              hasS3Resource
+                ? removeResource(resource.id, s3)
+                : removeResource(resource.id)
+            }
+          >
             Delete Resource
           </button>
           <button onClick={() => setIsToggleUpdate(!isToggleUpdate)}>

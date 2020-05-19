@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Resource from "./Resource";
-import { Storage } from "aws-amplify";
 
 const ResourceList = ({
-  boundAttemptDeleteResource,
   boundAttemptGetResources,
-  boundUpdateResourceRequest,
   boundAttemptGetS3Resources,
+  boundUpdateResourceRequest,
+  boundAttemptDeleteResource,
+  boundAttemptDeleteS3Resource,
   resources,
-  s3Resource,
+  s3Resources,
 }) => {
   useEffect(() => {
     async function fetch() {
@@ -18,19 +18,20 @@ const ResourceList = ({
     fetch();
   }, []);
 
+  //subscription
+  //
+
   return (
-    //if (status === UPDATE_RESOURCE_REQUEST) {
-    // <UpdateResource />
-    //}
     <div>
       {resources.map((resource) => {
         return resource ? (
           <div key={resource.id}>
             <Resource
               resource={resource}
-              s3Resource={s3Resource}
+              s3Resources={s3Resources}
               boundAttemptDeleteResource={boundAttemptDeleteResource}
               boundUpdateResourceRequest={boundUpdateResourceRequest}
+              boundAttemptDeleteS3Resource={boundAttemptDeleteS3Resource}
             />
           </div>
         ) : (
