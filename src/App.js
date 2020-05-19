@@ -16,6 +16,8 @@ import PostsList from "./components/PostsList";
 import Resource from "./components/Resource";
 import ResourceInputContainer from "./containers/ResourceInputContainer";
 import ResourcesListContainer from "./containers/ResourcesListContainer";
+import PostInputContainer from "./containers/PostInputContainer";
+import PostsListContainer from "./containers/PostsListContainer";
 
 function App() {
   console.log("auth", Auth, "current auth user", Auth.user);
@@ -30,11 +32,13 @@ function App() {
         <ResourcesListContainer path="/" />
         {/* <Resource path="resource" /> */}
         <ResourceInputContainer path="resource_input" />
-        {/* </ResourceList> */}
-        <PostsList path="post_list" />
+        {/* </ResourcesListContainer> */}
+        <PostsListContainer path="post_list" />
+        {/* <PostsList path="post_list" /> */}
         <Post path="post" />
-        <PostInput path="post_input" />
-        {/* </PostsList> */}
+        <PostInputContainer path="post_input" />
+        {/* <PostInput path="post_input" /> */}
+        {/* </PostsListContainer> */}
       </Router>
     </div>
   );

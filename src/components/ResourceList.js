@@ -1,37 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Resource from "./Resource";
 
-// ----TO DO----
-// [ ] GET Resource/Links from Dynamo
-// [ ] GET images/docs from S3
-
 const ResourceList = ({
-  boundAttemptDeleteResource,
   boundAttemptGetResources,
-  boundUpdateResourceRequest,
   boundAttemptGetS3Resources,
+  boundUpdateResourceRequest,
+  boundAttemptDeleteResource,
+  boundAttemptDeleteS3Resource,
   resources,
   s3Resources,
 }) => {
   useEffect(() => {
-    boundAttemptGetResources();
-    boundAttemptGetS3Resources();
+    async function fetch() {
+      const alpha = await boundAttemptGetS3Resources();
+      const beta = await boundAttemptGetResources();
+    }
+    fetch();
   }, []);
 
+  //subscription
+  //
+
   return (
-    //if (status === UPDATE_RESOURCE_REQUEST) {
-    // <UpdateResource />
-    //}
     <div>
       {resources.map((resource) => {
-        // console.log("resources", resources, "instructor", resource.instructor);
         return resource ? (
           <div key={resource.id}>
             <Resource
               resource={resource}
-              s3Resource={resource.uuid ? s3Resources.uuid : null}
+              s3Resources={s3Resources}
               boundAttemptDeleteResource={boundAttemptDeleteResource}
               boundUpdateResourceRequest={boundUpdateResourceRequest}
+              boundAttemptDeleteS3Resource={boundAttemptDeleteS3Resource}
             />
           </div>
         ) : (

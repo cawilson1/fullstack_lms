@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Post from "./Post";
 
-const PostsList = () => {
+const PostsList = ({
+  boundAttemptGetPosts,
+  boundUpdatePost,
+  boundAttemptDeletePost,
+  posts,
+}) => {
+  console.log("From PostsList Component", posts);
+
+  useEffect(() => {
+    boundAttemptGetPosts();
+  }, []);
+
   return (
-    <>
-      <h3> List of Posts:</h3>
-      <p> Post List 1</p>
-      <p> Post List 2</p>
-    </>
+    <div>
+      {posts.map((post) => {
+        return post ? (
+          <div key={post.id}>
+            <Post
+              post={post}
+              boundUpdatePost={boundUpdatePost}
+              boundAttemptDeletePost={boundAttemptDeletePost}
+            />
+          </div>
+        ) : (
+          "You haven't created any posts yet"
+        );
+      })}
+    </div>
   );
 };
-
 export default PostsList;

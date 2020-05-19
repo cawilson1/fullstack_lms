@@ -11,7 +11,7 @@ const getResourcesRequest = () => {
   };
 };
 
-const getResourcesSuccess = (response) => {
+export const getResourcesSuccess = (response) => {
   return {
     type: GET_RESOURCES_SUCCESS,
     resources: response,
@@ -27,7 +27,12 @@ const getResourcesError = () => {
 const attemptGetResources = async (dispatch) => {
   dispatch(getResourcesRequest());
   try {
-    const response = await API.graphql(graphqlOperation(listResources));
+    const response = await API.graphql(
+      graphqlOperation(listResources, {
+        limit: 20,
+        // nextToken: response.data.listResources.nextToken,
+      })
+    );
     console.log("attemptGetResources", response);
     response.data &&
       dispatch(getResourcesSuccess(response.data.listResources.items));

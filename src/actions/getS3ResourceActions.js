@@ -10,9 +10,10 @@ const getS3ResourceRequest = () => {
   };
 };
 
-const getS3ResourceSuccess = () => {
+const getS3ResourceSuccess = (response) => {
   return {
     type: GET_S3_RESOURCE_SUCCESS,
+    s3Resource: response,
   };
 };
 
@@ -29,7 +30,8 @@ const getS3ResourceAttempt = async (dispatch) => {
       level: "public",
       contentType: "image/png",
     });
-    dispatch(getS3ResourceSuccess());
+    console.log("getS3ActionsResponse", response);
+    dispatch(getS3ResourceSuccess(response));
   } catch (error) {
     dispatch(getS3ResourceError());
     console.error(error);
