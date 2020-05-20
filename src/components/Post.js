@@ -3,7 +3,6 @@ import UpdatePostContainer from "../containers/UpdatePostContainer";
 
 const Post = ({ post, boundUpdatePost, boundAttemptDeletePost }) => {
   const [isToggleUpdate, setIsToggleUpdate] = useState(false);
-  console.log("Post - Bananas", post);
 
   return (
     <div>

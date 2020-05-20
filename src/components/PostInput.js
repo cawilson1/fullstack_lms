@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Auth } from "aws-amplify";
 
 const PostInput = ({ boundCreatePost }) => {
-  // for S3 uploads - const [file, setFile] = useState("");
-  let authorInput, dataInput;
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const getUsername = async () => {
+      const useAuth = await Auth.currentUserInfo();
+      const gotUser = await useAuth.username;
+      setUsername(gotUser);
+    };
+    getUsername();
+  }, []);
+
+  let dataInput;
+
   return (
     <>
       <form
@@ -11,20 +23,13 @@ const PostInput = ({ boundCreatePost }) => {
           e.preventDefault();
           boundCreatePost &&
             boundCreatePost({
-              author: authorInput.value,
+              author: username,
               data: dataInput.value,
               uuid: null,
             });
-          // boundS3createpost goes here?
         }}
       >
         <h3>Post Input Here</h3>
-        <input
-          id="author"
-          type="text"
-          placeholder="Input author"
-          ref={(node) => (authorInput = node)}
-        />
         <textarea
           id="data"
           type="text"

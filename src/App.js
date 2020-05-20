@@ -8,8 +8,7 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 
 import Header from "./components/Header";
 import Nav from "./components/Nav";
-import Profile from "./components/Profile";
-import EditProfile from "./components/EditProfile";
+import EditUserProfile from "./components/EditUserProfile";
 import Post from "./components/Post";
 import PostInput from "./components/PostInput";
 import PostsList from "./components/PostsList";
@@ -18,16 +17,27 @@ import ResourceInputContainer from "./containers/ResourceInputContainer";
 import ResourcesListContainer from "./containers/ResourcesListContainer";
 import PostInputContainer from "./containers/PostInputContainer";
 import PostsListContainer from "./containers/PostsListContainer";
+import UserProfileContainer from "./containers/UserProfileContainer";
+
+// async function getUserName() {
+//   try {
+//     const currentUN = await Auth.currentUserInfo();
+//     console.log("auth", Auth, "UN", currentUN);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
 function App() {
-  console.log("auth", Auth, "current auth user", Auth.user);
+  // Auth.currentUserInfo();
+  // getUserName();
   return (
     <div className="App">
       <Header />
       <Nav />
       <Router>
-        <Profile path="profile" />
-        <EditProfile path="profile_edit" />
+        <UserProfileContainer path="profile" />
+        <EditUserProfile path="profile_edit" />
         {/* </Profile> */}
         <ResourcesListContainer path="/" />
         {/* <Resource path="resource" /> */}

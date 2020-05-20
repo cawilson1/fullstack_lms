@@ -1,14 +1,26 @@
-import React, { useState } from "react";
-import S3ResourceInput from "../components/S3ResourceInput";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-
 import { navigate } from "@reach/router";
+import { Auth } from "aws-amplify";
+
+import S3ResourceInput from "../components/S3ResourceInput";
 
 const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
   const [file, setFile] = useState("");
+  const [instructor, setInstructor] = useState("");
+
+  useEffect(() => {
+    const getInstructor = async () => {
+      const fromAuth = await Auth.currentUserInfo();
+      const gotInstructor = await fromAuth.username;
+      setInstructor(gotInstructor);
+    };
+    getInstructor();
+  }, []);
+
   const uuid = uuidv4() + ".png";
 
-  let instructorInput, dataInput, urlInput, urlTitleInput, urlDescriptionInput;
+  let dataInput, urlInput, urlTitleInput, urlDescriptionInput;
 
   return (
     <>
@@ -18,7 +30,7 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
           e.preventDefault();
           boundCreateResource &&
             boundCreateResource({
-              instructor: instructorInput.value,
+              instructor: instructor,
               data: dataInput.value,
               uuid: file ? uuid : null,
               url: urlInput.value === "" ? null : urlInput.value,
@@ -39,12 +51,6 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
         }}
       >
         <h3>Resource Input Here</h3>
-        <input
-          id="instructor"
-          type="text"
-          placeholder="Input instructor"
-          ref={(node) => (instructorInput = node)}
-        />
         <textarea
           id="data"
           type="text"

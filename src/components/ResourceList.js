@@ -12,8 +12,8 @@ const ResourceList = ({
 }) => {
   useEffect(() => {
     async function fetch() {
-      const alpha = await boundAttemptGetS3Resources();
-      const beta = await boundAttemptGetResources();
+      await boundAttemptGetS3Resources();
+      await boundAttemptGetResources();
     }
     fetch();
   }, []);

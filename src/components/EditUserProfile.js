@@ -1,6 +1,6 @@
 import React from "react";
 
-const EditProfile = () => {
+const EditUserProfile = () => {
   return (
     <>
       <h3>Edit Profile Here</h3>
@@ -9,4 +9,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditUserProfile;
