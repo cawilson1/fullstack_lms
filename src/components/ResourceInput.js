@@ -50,8 +50,9 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
                   ? null
                   : urlDescriptionInput.value,
             });
-
-          navigate("/");
+          setTimeout(function () {
+            navigate("/");
+          }, 2000);
         }}
       >
         <h3>Resource Input Here</h3>

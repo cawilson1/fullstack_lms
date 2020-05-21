@@ -14,8 +14,6 @@ const UserProfileInput = ({ boundUserCreateProfile }) => {
     getUsername();
   }, []);
 
-  console.log("username from profile input", username);
-
   let firstnameInput, lastnameInput, emailInput, bioInput, githubInput;
 
   return (

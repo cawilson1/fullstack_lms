@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
+import { navigate } from "@reach/router";
 
 const EditUserProfile = ({
   boundUpdateUserProfile,

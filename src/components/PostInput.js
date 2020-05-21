@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
+import { navigate } from "@reach/router";
 
 const PostInput = ({ boundCreatePost }) => {
   const [username, setUsername] = useState("");
@@ -27,6 +28,7 @@ const PostInput = ({ boundCreatePost }) => {
               data: dataInput.value,
               uuid: null,
             });
+          navigate("/post_list");
         }}
       >
         <h3>Post Input Here</h3>

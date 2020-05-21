@@ -1,4 +1,5 @@
 import {
+  GET_PROFILE_REQUEST,
   GET_PROFILE_SUCCESS,
   GET_PROFILE_ERROR,
 } from "../actions/getUserProfileActions";
@@ -8,6 +9,11 @@ export const getUserProfileReducer = (
   action
 ) => {
   switch (action.type) {
+    case GET_PROFILE_REQUEST:
+      return {
+        ...state,
+        status: action.type,
+      };
     case GET_PROFILE_SUCCESS:
       return {
         ...state,
