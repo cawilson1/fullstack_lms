@@ -1,36 +1,36 @@
-// import axios from "axios";
+import axios from "axios";
 
-// export const CREATE_PROFILE_REQUEST = "CREATE_PROFILE_REQUEST";
-// export const CREATE_PROFILE_SUCCESS = "CREATE_PROFILE_SUCCESS";
-// export const CREATE_PROFILE_ERROR = "CREATE_PROFILE_ERROR";
+export const UPDATE_PROFILE_REQUEST = "UPDATE_PROFILE_REQUEST";
+export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS";
+export const UPDATE_PROFILE_ERROR = "UPDATE_PROFILE_ERROR";
 
-// const createProfileRequest = (profile) => {
-//   return {
-//     type: CREATE_PROFILE_REQUEST,
-//     profile: profile,
-//   };
-// };
+const updateProfileRequest = (modifiedProfile) => {
+  return {
+    type: UPDATE_PROFILE_REQUEST,
+    modifiedProfile,
+  };
+};
 
-// const createProfileSuccess = () => {
-//   return {
-//     type: CREATE_PROFILE_SUCCESS,
-//   };
-// };
+const updateProfileSuccess = () => {
+  return {
+    type: UPDATE_PROFILE_SUCCESS,
+  };
+};
 
-// const createProfileError = () => {
-//   return {
-//     type: CREATE_PROFILE_ERROR,
-//   };
-// };
+const updateProfileError = () => {
+  return {
+    type: UPDATE_PROFILE_ERROR,
+  };
+};
 
-const attemptUpdateProfileRequest = async (dispatch, profile) => {
-  dispatch(updateProfileRequest(profile));
+const attemptUpdateProfileRequest = async (dispatch, modifiedProfile) => {
+  dispatch(updateProfileRequest(modifiedProfile));
   try {
     const response = await axios({
       method: "put",
       url:
         "https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/update_user",
-      data: profile,
+      data: modifiedProfile,
       header: {
         "Content-Type": "application/json",
       },
@@ -42,6 +42,7 @@ const attemptUpdateProfileRequest = async (dispatch, profile) => {
   }
 };
 
-export const createProfileInjector = (dispatch) => {
-  return (profile) => attemptCreateProfileRequest(dispatch, profile);
+export const updateProfileInjector = (dispatch) => {
+  return (modifiedProfile) =>
+    attemptUpdateProfileRequest(dispatch, modifiedProfile);
 };

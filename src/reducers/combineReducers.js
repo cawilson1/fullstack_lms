@@ -12,6 +12,7 @@ import { updatePostReducer } from "./updatePostReducer";
 import { deleteS3ResourceReducer } from "./deleteS3ResourceReducer";
 import { getUserProfileReducer } from "./getUserProfileReducer";
 import { createUserProfileReducer } from "./createUserProfileReducer";
+import { updateUserProfileReducer } from "./updateUserProfileReducer";
 
 export const rootReducer = combineReducers({
   createResourceReducer,
@@ -26,4 +27,5 @@ export const rootReducer = combineReducers({
   deleteS3ResourceReducer,
   getUserProfileReducer,
   createUserProfileReducer,
+  updateUserProfileReducer,
 });
