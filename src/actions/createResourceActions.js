@@ -28,7 +28,7 @@ const createResourceError = () => {
 const attemptCreateResource = async (dispatch, resource) => {
   dispatch(createResourceRequest(resource));
   try {
-    // const subscription = await subscribeCreate();
+    const subscription = await subscribeResource();
     const request = await API.graphql(
       graphqlOperation(createResource, {
         input: resource,
@@ -47,8 +47,8 @@ export const createResourceInjector = (dispatch) => {
   };
 };
 
-//subscription function - revisit (not getting to response console.log)
-async function subscribeCreate() {
+//subscription function
+async function subscribeResource() {
   try {
     const subscription = await API.graphql(
       graphqlOperation(onCreateResource)

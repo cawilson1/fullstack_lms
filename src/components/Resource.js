@@ -12,8 +12,6 @@ const Resource = ({
   const [hasS3Resource, setHasS3Resource] = useState(false);
   const [s3, setS3] = useState("");
 
-  console.log("Type of date", typeof resource.createdAt);
-
   function adjustedDate(date) {
     let mm = date.slice(6, 7);
     let dd = date.slice(8, 10);

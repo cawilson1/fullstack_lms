@@ -8,6 +8,9 @@ import S3ResourceInput from "../components/S3ResourceInput";
 const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
   const [file, setFile] = useState("");
   const [instructor, setInstructor] = useState("");
+  // const [isResourceType, setIsResourceType] = useState({
+
+  // });
 
   useEffect(() => {
     const getInstructor = async () => {
@@ -28,6 +31,13 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
         style={styles.formStyle}
         onSubmit={(e) => {
           e.preventDefault();
+          if (file !== "") {
+            boundS3CreateResource &&
+              boundS3CreateResource({
+                file: file,
+                uuid: uuid,
+              });
+          }
           boundCreateResource &&
             boundCreateResource({
               instructor: instructor,
@@ -40,17 +50,20 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
                   ? null
                   : urlDescriptionInput.value,
             });
-          if (file !== "") {
-            boundS3CreateResource &&
-              boundS3CreateResource({
-                file: file,
-                uuid: uuid,
-              });
-          }
+
           navigate("/");
         }}
       >
         <h3>Resource Input Here</h3>
+        <h4>Type of Resource:</h4>
+        {/* <div>
+          <label htmlFor="addUrl">Add a link</label>
+          <input type="radio" name="url" value="addUrl" />
+          <label htmlFor="addAttachment">Add an attachment</label>
+          <input type="radio" name="attachment" value="addAttachment" />
+          <label htmlFor="addCodeSnippet">Add code snippet</label>
+          <input type="radio" name="snippet" value="addCodeSnippet" />
+        </div> */}
         <textarea
           id="data"
           type="text"
@@ -75,7 +88,6 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
           placeholder="Input url description"
           ref={(node) => (urlDescriptionInput = node)}
         />
-        <input type="checkbox"></input>
         <S3ResourceInput setFile={setFile} />
         <button type="submit">Submit</button>
       </form>

@@ -26,7 +26,7 @@ const createProfileError = () => {
 const attemptCreateProfileRequest = async (dispatch, profile) => {
   dispatch(createProfileRequest(profile));
   try {
-    const response = await axios({
+    await axios({
       method: "post",
       url:
         "https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/create_user",

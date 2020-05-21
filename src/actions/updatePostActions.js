@@ -27,7 +27,7 @@ const updatePostError = () => {
 const attemptUpdatePost = async (dispatch, modifiedPost) => {
   dispatch(updatePostRequest());
   try {
-    const request = await API.graphql(
+    await API.graphql(
       graphqlOperation(updatePost, {
         input: modifiedPost,
       })

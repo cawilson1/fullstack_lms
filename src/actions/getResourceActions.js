@@ -30,10 +30,8 @@ const attemptGetResources = async (dispatch) => {
     const response = await API.graphql(
       graphqlOperation(listResources, {
         limit: 20,
-        // nextToken: response.data.listResources.nextToken,
       })
     );
-    console.log("attemptGetResources", response);
     response.data &&
       dispatch(getResourcesSuccess(response.data.listResources.items));
   } catch (error) {

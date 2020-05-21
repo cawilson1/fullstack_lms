@@ -29,7 +29,7 @@ const Post = ({ post, boundUpdatePost, boundAttemptDeletePost }) => {
         <div>
           <h4>Start of Post by {post.author}</h4>
           <p>Created: {adjustedDate(post.createdAt)}</p>
-          {post.createdAt == post.updatedAt ? (
+          {post.createdAt === post.updatedAt ? (
             <></>
           ) : (
             <p>Updated: {adjustedDate(post.updatedAt)}</p>

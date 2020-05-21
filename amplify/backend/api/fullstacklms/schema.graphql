@@ -7,7 +7,7 @@ type Resource @model {
   urlDescription: String
   url: String
   createdAt: AWSDateTime
-  updatedAt: AWSDateTime
+  updatedAt: AWSDateTimes
 }
 
 type Post @model {

@@ -28,13 +28,9 @@ const attemptCreateS3Resource = async (dispatch, s3Resource) => {
   dispatch(createS3ResourceRequest(s3Resource));
   // const uuid = uuidv4() + ".png";
   try {
-    const request = await Storage.put(
-      "test/" + s3Resource.uuid,
-      s3Resource.file,
-      {
-        contentType: "image/png",
-      }
-    );
+    await Storage.put("test/" + s3Resource.uuid, s3Resource.file, {
+      contentType: "image/png",
+    });
     dispatch(createS3ResourceSuccess());
   } catch (error) {
     dispatch(createS3ResourceError());

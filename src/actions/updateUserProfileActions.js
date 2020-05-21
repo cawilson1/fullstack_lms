@@ -26,7 +26,7 @@ const updateProfileError = () => {
 const attemptUpdateProfileRequest = async (dispatch, modifiedProfile) => {
   dispatch(updateProfileRequest(modifiedProfile));
   try {
-    const response = await axios({
+    await axios({
       method: "put",
       url:
         "https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/update_user",

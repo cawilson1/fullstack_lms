@@ -7,8 +7,6 @@ const PostsList = ({
   boundAttemptDeletePost,
   posts,
 }) => {
-  console.log("From PostsList Component", posts);
-
   useEffect(() => {
     boundAttemptGetPosts();
   }, []);
