@@ -6,6 +6,8 @@ type Resource @model {
   urlTitle: String
   urlDescription: String
   url: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
 
 type Post @model {
@@ -13,4 +15,6 @@ type Post @model {
   author: String!
   data: String!
   uuid: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }

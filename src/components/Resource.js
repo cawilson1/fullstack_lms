@@ -12,6 +12,20 @@ const Resource = ({
   const [hasS3Resource, setHasS3Resource] = useState(false);
   const [s3, setS3] = useState("");
 
+  console.log("Type of date", typeof resource.createdAt);
+
+  function adjustedDate(date) {
+    let mm = date.slice(6, 7);
+    let dd = date.slice(8, 10);
+    let yy = date.slice(0, 4);
+    let hr = (date.slice(11, 13) - 4) % 12;
+    let min = date.slice(14, 16);
+    if (hr === 0) {
+      hr = 12;
+    }
+    return mm + "/" + dd + "/" + yy + " at " + hr + ":" + min;
+  }
+
   function removeResource(id, key = "") {
     if (hasS3Resource) {
       boundAttemptDeleteResource(id);
@@ -43,7 +57,12 @@ const Resource = ({
           <h4>Resource Start</h4>
           <p>{resource.instructor}</p>
           <p>{resource.data}</p>
-          <p>{resource.createdAt}</p>
+          <p>Added {adjustedDate(resource.createdAt)}</p>
+          {resource.createdAt == resource.updatedAt ? (
+            <></>
+          ) : (
+            <p>Updated {adjustedDate(resource.updatedAt)}</p>
+          )}
           <div>
             {hasS3Resource ? (
               <S3Image

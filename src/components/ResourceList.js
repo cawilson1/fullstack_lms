@@ -21,6 +21,8 @@ const ResourceList = ({
   //subscription
   //
 
+  console.log("Resources from ResourceList", resources);
+
   return (
     <div>
       {resources.map((resource) => {

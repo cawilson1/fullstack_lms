@@ -11,6 +11,8 @@ export const onCreateResource = /* GraphQL */ `
       urlTitle
       urlDescription
       url
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -24,6 +26,8 @@ export const onUpdateResource = /* GraphQL */ `
       urlTitle
       urlDescription
       url
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -37,6 +41,8 @@ export const onDeleteResource = /* GraphQL */ `
       urlTitle
       urlDescription
       url
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -47,6 +53,8 @@ export const onCreatePost = /* GraphQL */ `
       author
       data
       uuid
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -57,6 +65,8 @@ export const onUpdatePost = /* GraphQL */ `
       author
       data
       uuid
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -67,6 +77,8 @@ export const onDeletePost = /* GraphQL */ `
       author
       data
       uuid
+      createdAt
+      updatedAt
     }
   }
 `;

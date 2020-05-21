@@ -11,6 +11,8 @@ export const getResource = /* GraphQL */ `
       urlTitle
       urlDescription
       url
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -29,6 +31,8 @@ export const listResources = /* GraphQL */ `
         urlTitle
         urlDescription
         url
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -41,6 +45,8 @@ export const getPost = /* GraphQL */ `
       author
       data
       uuid
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -56,6 +62,8 @@ export const listPosts = /* GraphQL */ `
         author
         data
         uuid
+        createdAt
+        updatedAt
       }
       nextToken
     }
