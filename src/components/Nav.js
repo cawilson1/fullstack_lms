@@ -5,6 +5,7 @@ const Nav = () => {
   return (
     <>
       <Link to="profile">Profile</Link>{" "}
+      <Link to="create_profile"> Create Profile</Link>
       <Link to="profile_edit">Edit Profile</Link>{" "}
       <Link to="post_list">Posts</Link> <Link to="post_input">Create Post</Link>{" "}
       <Link to="/">Resources</Link>{" "}

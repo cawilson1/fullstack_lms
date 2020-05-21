@@ -18,6 +18,7 @@ import ResourcesListContainer from "./containers/ResourcesListContainer";
 import PostInputContainer from "./containers/PostInputContainer";
 import PostsListContainer from "./containers/PostsListContainer";
 import UserProfileContainer from "./containers/UserProfileContainer";
+import UserProfileInputContainer from "./containers/UserProfileInputContainer";
 
 // async function getUserName() {
 //   try {
@@ -37,6 +38,7 @@ function App() {
       <Nav />
       <Router>
         <UserProfileContainer path="profile" />
+        <UserProfileInputContainer path="create_profile" />
         <EditUserProfile path="profile_edit" />
         {/* </Profile> */}
         <ResourcesListContainer path="/" />

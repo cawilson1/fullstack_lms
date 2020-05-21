@@ -1,42 +1,47 @@
-// export const CREATE_POST_REQUEST = "CREATE_POST_REQUEST";
-// export const CREATE_POST_SUCCESS = "CREATE_POST_SUCCESS";
-// export const CREATE_POST_ERROR = "CREATE_POST_ERROR";
+import axios from "axios";
 
-// const createPostRequest = (post) => {
-//   return {
-//     type: CREATE_POST_REQUEST,
-//     post: post,
-//   };
-// };
+export const CREATE_PROFILE_REQUEST = "CREATE_PROFILE_REQUEST";
+export const CREATE_PROFILE_SUCCESS = "CREATE_PROFILE_SUCCESS";
+export const CREATE_PROFILE_ERROR = "CREATE_PROFILE_ERROR";
 
-// const createPostSuccess = () => {
-//   return {
-//     type: CREATE_POST_SUCCESS,
-//   };
-// };
+const createProfileRequest = (profile) => {
+  return {
+    type: CREATE_PROFILE_REQUEST,
+    profile: profile,
+  };
+};
 
-// const createPostError = () => {
-//   return {
-//     type: CREATE_POST_ERROR,
-//   };
-// };
+const createProfileSuccess = () => {
+  return {
+    type: CREATE_PROFILE_SUCCESS,
+  };
+};
 
-// const attemptCreatePostRequest = async (dispatch, post) => {
-//   dispatch(createPostRequest(post));
-//   try {
-//     const response = await API.graphql(
-//       graphqlOperation(createPost, {
-//         input: post,
-//       })
-//     );
-//     dispatch(createPostSuccess());
-//     console.log("POST RESPONSE", response);
-//   } catch (error) {
-//     dispatch(createPostError());
-//     console.error("Error Creating Post", error);
-//   }
-// };
+const createProfileError = () => {
+  return {
+    type: CREATE_PROFILE_ERROR,
+  };
+};
 
-// export const createPostInjector = (dispatch) => {
-//   return (post) => attemptCreatePostRequest(dispatch, post);
-// };
+const attemptCreateProfileRequest = async (dispatch, profile) => {
+  dispatch(createProfileRequest(profile));
+  try {
+    const response = await axios({
+      method: "post",
+      url:
+        "https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/create_user",
+      data: profile,
+      header: {
+        "Content-Type": "application/json",
+      },
+    });
+    dispatch(createProfileSuccess());
+  } catch (error) {
+    dispatch(createProfileError());
+    console.error("Error Creating Profile", error);
+  }
+};
+
+export const createProfileInjector = (dispatch) => {
+  return (profile) => attemptCreateProfileRequest(dispatch, profile);
+};
