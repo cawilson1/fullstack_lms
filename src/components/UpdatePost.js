@@ -20,7 +20,10 @@ const UpdatePost = ({
 }) => {
   const classes = useStyles();
 
-  let author, data;
+  console.log("Post, what's here?", post);
+
+  let data;
+  // let author,
   return (
     <div>
       <form
@@ -29,7 +32,7 @@ const UpdatePost = ({
           boundUpdatePost &&
             (await boundUpdatePost({
               id: post.id,
-              author: author.value,
+              author: post.author,
               data: data.value,
             }));
           await setIsToggleUpdate(!isToggleUpdate);
@@ -37,12 +40,6 @@ const UpdatePost = ({
         }}
       >
         <Typography className={classes.typography}>
-          <input
-            id="author"
-            type="text"
-            defaultValue={post.author}
-            ref={(node) => (author = node)}
-          />
           <textarea
             id="data"
             type="text"

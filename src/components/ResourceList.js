@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { onCreateResource } from "../graphql/subscriptions";
+import { API, graphqlOperation } from "aws-amplify";
+
 import Resource from "./Resource";
 
 const ResourceList = ({
@@ -12,7 +15,22 @@ const ResourceList = ({
 
   useEffect(() => {
     boundAttemptGetResources();
-  }, [isRender]);
+  }, []);
+
+  useEffect(() => {
+    const subscription = API.graphql(
+      graphqlOperation(onCreateResource)
+    ).subscribe({
+      next: (response) => {
+        console.log(
+          "Subscription response",
+          response.value.data.onCreateResource
+        );
+        boundAttemptGetResources();
+      },
+    });
+    return () => subscription.unsubscribe();
+  }, [resources]);
 
   return (
     <div>
