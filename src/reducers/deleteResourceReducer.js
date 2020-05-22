@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   id: null,
+  key: null,
 };
 
 export const deleteResourceReducer = (state = initialState, action) => {
@@ -14,18 +15,21 @@ export const deleteResourceReducer = (state = initialState, action) => {
       return {
         ...state,
         id: action.id,
+        key: action.key,
         status: action.type,
       };
     case DELETE_RESOURCE_SUCCESS:
       return {
         ...state,
         id: null,
+        key: null,
         status: action.type,
       };
     case DELETE_RESOURCE_ERROR:
       return {
         ...state,
         id: null,
+        key: null,
         status: action.type,
       };
     default:

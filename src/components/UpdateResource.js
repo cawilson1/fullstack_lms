@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -17,20 +17,21 @@ const UpdateResource = ({
   boundUpdateResource,
   isToggleUpdate,
   setIsToggleUpdate,
+  isRender,
+  setIsRender,
 }) => {
   const classes = useStyles();
 
   let instructor, data, uuid, url, urlTitle, urlDescription;
 
-  //subscription to handle render updated
-
   return (
     <div>
       <form
-        onSubmit={(e) => {
+        style={styles.formStyle}
+        onSubmit={async (e) => {
           e.preventDefault();
           boundUpdateResource &&
-            boundUpdateResource({
+            (await boundUpdateResource({
               id: resource.id,
               instructor: instructor.value,
               data: data.value,
@@ -42,8 +43,9 @@ const UpdateResource = ({
                 urlDescription.value === ""
                   ? resource.urlDescription
                   : urlDescription.value,
-            });
-          setIsToggleUpdate(!isToggleUpdate);
+            }));
+          await setIsToggleUpdate(!isToggleUpdate);
+          await setIsRender(!isRender);
         }}
       >
         <Typography className={classes.typography}>
@@ -59,12 +61,6 @@ const UpdateResource = ({
             defaultValue={resource.data}
             ref={(node) => (data = node)}
           ></textarea>
-          <input
-            id="uuid"
-            type="text"
-            defaultValue={resource.uuid}
-            ref={(node) => (uuid = node)}
-          />
           <input
             id="url"
             type="text"
@@ -83,6 +79,12 @@ const UpdateResource = ({
             defaultValue={resource.urlDescription}
             ref={(node) => (urlDescription = node)}
           />
+          <input
+            id="uuid"
+            type="text"
+            defaultValue={resource.uuid}
+            ref={(node) => (uuid = node)}
+          />
           <Button
             // aria-describedby={id}
             variant="contained"
@@ -98,3 +100,11 @@ const UpdateResource = ({
 };
 
 export default UpdateResource;
+
+const styles = {
+  formStyle: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+};

@@ -1,14 +1,21 @@
-import React, { useState } from "react";
-import S3ResourceInput from "../components/S3ResourceInput";
-import { v4 as uuidv4 } from "uuid";
-
+import React, { useState, useEffect } from "react";
 import { navigate } from "@reach/router";
+import { Auth } from "aws-amplify";
 
 const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
   const [file, setFile] = useState("");
-  const uuid = uuidv4() + ".png";
+  const [instructor, setInstructor] = useState("");
 
-  let instructorInput, dataInput, urlInput, urlTitleInput, urlDescriptionInput;
+  useEffect(() => {
+    const getInstructor = async () => {
+      const fromAuth = await Auth.currentUserInfo();
+      const gotInstructor = await fromAuth.username;
+      setInstructor(gotInstructor);
+    };
+    getInstructor();
+  }, []);
+
+  let dataInput, urlInput, urlTitleInput, urlDescriptionInput;
 
   return (
     <>
@@ -18,9 +25,10 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
           e.preventDefault();
           boundCreateResource &&
             boundCreateResource({
-              instructor: instructorInput.value,
+              instructor: instructor,
               data: dataInput.value,
-              uuid: file ? uuid : null,
+              file: file ? file : "", //mountains.jpg
+              // uuid: file ? uuid : null, //0492073gjdi38yg29385 + .extension, then upload to S3/associate w Dynamo
               url: urlInput.value === "" ? null : urlInput.value,
               urlTitle: urlTitleInput.value === "" ? null : urlTitleInput.value,
               urlDescription:
@@ -28,23 +36,18 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
                   ? null
                   : urlDescriptionInput.value,
             });
-          if (file !== "") {
-            boundS3CreateResource &&
-              boundS3CreateResource({
-                file: file,
-                uuid: uuid,
-              });
-          }
-          navigate("/");
         }}
       >
         <h3>Resource Input Here</h3>
-        <input
-          id="instructor"
-          type="text"
-          placeholder="Input instructor"
-          ref={(node) => (instructorInput = node)}
-        />
+        <h4>Type of Resource:</h4>
+        <div>
+          <label htmlFor="addUrl">Add a link</label>
+          <input type="radio" name="url" value="addUrl" />
+          <label htmlFor="addAttachment">Add an attachment</label>
+          <input type="radio" name="attachment" value="addAttachment" />
+          <label htmlFor="addCodeSnippet">Add code snippet</label>
+          <input type="radio" name="snippet" value="addCodeSnippet" />
+        </div>
         <textarea
           id="data"
           type="text"
@@ -69,9 +72,13 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
           placeholder="Input url description"
           ref={(node) => (urlDescriptionInput = node)}
         />
-        <input type="checkbox"></input>
-        <S3ResourceInput setFile={setFile} />
-        <button type="submit">Submit</button>
+        <input
+          type="file"
+          accept="image/*, .pdf, .txt, .doc, .docx, .json"
+          id="s3-resource"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+        <button type="submit">Submit Resource</button>
       </form>
     </>
   );

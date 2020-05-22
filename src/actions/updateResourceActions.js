@@ -1,6 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { updateResource } from "../graphql/mutations";
-import { onUpdateResource } from "../graphql/subscriptions";
 
 export const UPDATE_RESOURCE_SUCCESS = "UPDATE_RESOURCE_SUCCESS";
 export const UPDATE_RESOURCE_ERROR = "UPDATE_RESOURCE_ERROR";

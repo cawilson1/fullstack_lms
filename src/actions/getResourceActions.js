@@ -1,4 +1,6 @@
 import { API, graphqlOperation } from "aws-amplify";
+import { Storage } from "aws-amplify";
+
 import { listResources } from "../graphql/queries";
 
 export const GET_RESOURCES_REQUEST = "GET_RESOURCES_REQUEST";
@@ -11,10 +13,11 @@ const getResourcesRequest = () => {
   };
 };
 
-export const getResourcesSuccess = (response) => {
+export const getResourcesSuccess = (resources, s3Resources) => {
   return {
     type: GET_RESOURCES_SUCCESS,
-    resources: response,
+    resources: resources,
+    s3Resources: s3Resources,
   };
 };
 
@@ -27,15 +30,20 @@ const getResourcesError = () => {
 const attemptGetResources = async (dispatch) => {
   dispatch(getResourcesRequest());
   try {
+    const s3Resources = await Storage.list("test/", {
+      level: "public",
+      contentType: "image/png",
+    });
+    console.log("getS3ActionsResponse", s3Resources);
     const response = await API.graphql(
       graphqlOperation(listResources, {
         limit: 20,
-        // nextToken: response.data.listResources.nextToken,
       })
     );
-    console.log("attemptGetResources", response);
     response.data &&
-      dispatch(getResourcesSuccess(response.data.listResources.items));
+      dispatch(
+        getResourcesSuccess(response.data.listResources.items, s3Resources)
+      );
   } catch (error) {
     dispatch(getResourcesError());
     console.error("attemptGetResourcesError", error);

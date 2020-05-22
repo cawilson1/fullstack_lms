@@ -27,7 +27,7 @@ const deletePostError = () => {
 const attemptPostResource = async (dispatch, id) => {
   dispatch(deletePostRequest(id));
   try {
-    const request = await API.graphql(
+    await API.graphql(
       graphqlOperation(deletePost, {
         input: { id: id },
       })

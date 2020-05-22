@@ -1,15 +1,18 @@
 import { deleteResource } from "../graphql/mutations";
 import { API, graphqlOperation } from "aws-amplify";
+import { Storage } from "aws-amplify";
+
 import { onDeleteResource } from "../graphql/subscriptions";
 
 export const DELETE_RESOURCE_SUCCESS = "DELETE_RESOURCE_SUCCESS";
 export const DELETE_RESOURCE_ERROR = "DELETE_RESOURCE_ERROR";
 export const DELETE_RESOURCE_REQUEST = "DELETE_RESOURCE_REQUEST";
 
-const deleteResourceRequest = (id) => {
+const deleteResourceRequest = (id, key) => {
   return {
     type: DELETE_RESOURCE_REQUEST,
     id,
+    key,
   };
 };
 
@@ -25,9 +28,10 @@ const deleteResourceError = () => {
   };
 };
 
-const attemptDeleteResource = async (dispatch, id) => {
-  dispatch(deleteResourceRequest(id));
+const attemptDeleteResource = async (dispatch, id, key) => {
+  dispatch(deleteResourceRequest(id, key));
   try {
+    if (key !== "") await Storage.remove(key);
     const request = await API.graphql(
       graphqlOperation(deleteResource, {
         input: { id: id },
@@ -41,5 +45,5 @@ const attemptDeleteResource = async (dispatch, id) => {
 };
 
 export const deleteResourceInjector = (dispatch) => {
-  return (id) => attemptDeleteResource(dispatch, id);
+  return (id, key) => attemptDeleteResource(dispatch, id, key);
 };

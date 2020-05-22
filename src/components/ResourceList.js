@@ -1,25 +1,72 @@
 import React, { useEffect, useState } from "react";
+import { API, graphqlOperation } from "aws-amplify";
+
+import {
+  onCreateResource,
+  onUpdateResource,
+  onDeleteResource,
+} from "../graphql/subscriptions";
 import Resource from "./Resource";
 
 const ResourceList = ({
   boundAttemptGetResources,
-  boundAttemptGetS3Resources,
   boundUpdateResourceRequest,
   boundAttemptDeleteResource,
-  boundAttemptDeleteS3Resource,
   resources,
   s3Resources,
 }) => {
+  const [isRender, setIsRender] = useState(false);
+
+  console.log("Resources, maybe we can see sort", resources);
+
   useEffect(() => {
-    async function fetch() {
-      const alpha = await boundAttemptGetS3Resources();
-      const beta = await boundAttemptGetResources();
-    }
-    fetch();
+    boundAttemptGetResources();
   }, []);
 
-  //subscription
-  //
+  useEffect(() => {
+    const subscription = API.graphql(
+      graphqlOperation(onCreateResource)
+    ).subscribe({
+      next: (response) => {
+        console.log(
+          "onCreate Subscription",
+          response.value.data.onCreateResource
+        );
+        boundAttemptGetResources();
+      },
+    });
+    return () => subscription.unsubscribe();
+  }, [resources]);
+
+  useEffect(() => {
+    const subscription = API.graphql(
+      graphqlOperation(onUpdateResource)
+    ).subscribe({
+      next: (response) => {
+        console.log(
+          "Update subscription",
+          response.value.data.onUpdateResource
+        );
+        boundAttemptGetResources();
+      },
+    });
+    return () => subscription.unsubscribe();
+  }, [resources]);
+
+  useEffect(() => {
+    const subscription = API.graphql(
+      graphqlOperation(onDeleteResource)
+    ).subscribe({
+      next: (response) => {
+        console.log(
+          "Delete subscription",
+          response.value.data.onDeleteResource
+        );
+        boundAttemptGetResources();
+      },
+    });
+    return () => subscription.unsubscribe();
+  }, [resources]);
 
   return (
     <div>
@@ -31,7 +78,10 @@ const ResourceList = ({
               s3Resources={s3Resources}
               boundAttemptDeleteResource={boundAttemptDeleteResource}
               boundUpdateResourceRequest={boundUpdateResourceRequest}
-              boundAttemptDeleteS3Resource={boundAttemptDeleteS3Resource}
+              boundAttemptGetResources={boundAttemptGetResources}
+              isRender={isRender}
+              setIsRender={setIsRender}
+              resources={resources}
             />
           </div>
         ) : (
