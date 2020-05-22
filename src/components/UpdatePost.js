@@ -15,6 +15,8 @@ const UpdatePost = ({
   setIsToggleUpdate,
   isToggleUpdate,
   post,
+  isRender,
+  setIsRender,
 }) => {
   const classes = useStyles();
 
@@ -22,15 +24,16 @@ const UpdatePost = ({
   return (
     <div>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           boundUpdatePost &&
-            boundUpdatePost({
+            (await boundUpdatePost({
               id: post.id,
               author: author.value,
               data: data.value,
-            });
-          setIsToggleUpdate(!isToggleUpdate);
+            }));
+          await setIsToggleUpdate(!isToggleUpdate);
+          await setIsRender(!isRender);
         }}
       >
         <Typography className={classes.typography}>

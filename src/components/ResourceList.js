@@ -3,10 +3,8 @@ import Resource from "./Resource";
 
 const ResourceList = ({
   boundAttemptGetResources,
-  // boundAttemptGetS3Resources,
   boundUpdateResourceRequest,
   boundAttemptDeleteResource,
-  // boundAttemptDeleteS3Resource,
   resources,
   s3Resources,
 }) => {
@@ -28,7 +26,6 @@ const ResourceList = ({
               boundUpdateResourceRequest={boundUpdateResourceRequest}
               isRender={isRender}
               setIsRender={setIsRender}
-              // boundAttemptDeleteS3Resource={boundAttemptDeleteS3Resource}
             />
           </div>
         ) : (

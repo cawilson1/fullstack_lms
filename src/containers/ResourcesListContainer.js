@@ -1,11 +1,6 @@
 import { connect } from "react-redux";
-import {
-  getResourcesInjector,
-  // getResourcesSuccess,
-} from "../actions/getResourceActions";
-// import { getS3ResourceInjector } from "../actions/getS3ResourceActions";
+import { getResourcesInjector } from "../actions/getResourceActions";
 import { deleteResourceInjector } from "../actions/deleteResourceActions";
-// import { deleteS3ResourceInjector } from "../actions/deleteS3ResourceActions";
 
 import ResourceList from "../components/ResourceList";
 
@@ -21,9 +16,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     boundAttemptGetResources: getResourcesInjector(dispatch),
     boundAttemptDeleteResource: deleteResourceInjector(dispatch),
-    // boundAttemptGetS3Resources: getS3ResourceInjector(dispatch),
-    // boundAttemptDeleteS3Resource: deleteS3ResourceInjector(dispatch),
-    // boundNewListAfterMutation: () => dispatch(getResourcesSuccess()),
   };
 };
 

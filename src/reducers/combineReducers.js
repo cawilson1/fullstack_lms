@@ -5,11 +5,9 @@ import { createUserProfileReducer } from "./createUserProfileReducer";
 import { createPostReducer } from "./createPostReducer";
 
 import { deleteResourceReducer } from "./deleteResourceReducer";
-// import { deleteS3ResourceReducer } from "./deleteS3ResourceReducer";
 import { deletePostReducer } from "./deletePostReducer";
 
 import { getResourcesReducer } from "./getResourceReducer";
-// import { getS3ResourceReducer } from "./getS3ResourceReducer";
 import { getPostsReducer } from "./getPostsReducer";
 import { getUserProfileReducer } from "./getUserProfileReducer";
 
@@ -21,7 +19,6 @@ export const rootReducer = combineReducers({
   createResourceReducer,
   getResourcesReducer,
   deleteResourceReducer,
-  // deleteS3ResourceReducer,
   updateResourceReducer,
   createPostReducer,
   getPostsReducer,
@@ -29,6 +26,5 @@ export const rootReducer = combineReducers({
   getUserProfileReducer,
   createUserProfileReducer,
   updateUserProfileReducer,
-  // getS3ResourceReducer,
   deletePostReducer,
 });

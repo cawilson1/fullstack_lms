@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import UpdatePostContainer from "../containers/UpdatePostContainer";
 
-const Post = ({ post, boundUpdatePost, boundAttemptDeletePost }) => {
+const Post = ({
+  post,
+  boundUpdatePost,
+  boundAttemptDeletePost,
+  isRender,
+  setIsRender,
+}) => {
   const [isToggleUpdate, setIsToggleUpdate] = useState(false);
 
   function adjustedDate(date) {
@@ -24,6 +30,8 @@ const Post = ({ post, boundUpdatePost, boundAttemptDeletePost }) => {
           setIsToggleUpdate={setIsToggleUpdate}
           isToggleUpdate={isToggleUpdate}
           boundUpdatePost={boundUpdatePost}
+          isRender={isRender}
+          setIsRender={setIsRender}
         />
       ) : (
         <div>
@@ -37,10 +45,19 @@ const Post = ({ post, boundUpdatePost, boundAttemptDeletePost }) => {
 
           <p>{post.data}</p>
 
-          <button onClick={() => boundAttemptDeletePost(post.id)}>
+          <button
+            onClick={async () => {
+              await boundAttemptDeletePost(post.id);
+              await setIsRender(!isRender);
+            }}
+          >
             Delete Post
           </button>
-          <button onClick={() => setIsToggleUpdate(!isToggleUpdate)}>
+          <button
+            onClick={() => {
+              setIsToggleUpdate(!isToggleUpdate);
+            }}
+          >
             Update Post
           </button>
           <p>-------</p>

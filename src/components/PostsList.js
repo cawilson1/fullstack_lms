@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Post from "./Post";
 
 const PostsList = ({
@@ -7,9 +7,11 @@ const PostsList = ({
   boundAttemptDeletePost,
   posts,
 }) => {
+  const [isRender, setIsRender] = useState(false);
+
   useEffect(() => {
     boundAttemptGetPosts();
-  }, []);
+  }, [isRender]);
 
   return (
     <div>
@@ -20,6 +22,8 @@ const PostsList = ({
               post={post}
               boundUpdatePost={boundUpdatePost}
               boundAttemptDeletePost={boundAttemptDeletePost}
+              isRender={isRender}
+              setIsRender={setIsRender}
             />
           </div>
         ) : (

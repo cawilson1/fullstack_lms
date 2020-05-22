@@ -5,7 +5,6 @@ import { S3Image } from "aws-amplify-react";
 const Resource = ({
   resource,
   boundAttemptDeleteResource,
-  // boundAttemptDeleteS3Resource,
   s3Resources,
   isRender,
   setIsRender,
@@ -25,10 +24,6 @@ const Resource = ({
     }
     return mm + "/" + dd + "/" + yy + " at " + hr + ":" + min;
   }
-
-  // function removeResource(id, s3) {
-  //   boundAttemptDeleteResource(id, s3);
-  // }
 
   useEffect(() => {
     const matchKey = (s3Resource) => {
