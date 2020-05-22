@@ -29,7 +29,7 @@ const ResourceList = ({
     ).subscribe({
       next: (response) => {
         console.log(
-          "Subscription response",
+          "onCreate Subscription",
           response.value.data.onCreateResource
         );
         boundAttemptGetResources();
@@ -44,7 +44,7 @@ const ResourceList = ({
     ).subscribe({
       next: (response) => {
         console.log(
-          "Update subscription rec'd",
+          "Update subscription",
           response.value.data.onUpdateResource
         );
         boundAttemptGetResources();
@@ -59,7 +59,7 @@ const ResourceList = ({
     ).subscribe({
       next: (response) => {
         console.log(
-          "Update subscription rec'd",
+          "Delete subscription",
           response.value.data.onDeleteResource
         );
         boundAttemptGetResources();
