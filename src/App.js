@@ -21,18 +21,19 @@ import UserProfileContainer from "./containers/UserProfileContainer";
 import UserProfileInputContainer from "./containers/UserProfileInputContainer";
 // import UpdateUserProfileContainer from "./containers/UpdateUserProfileContainer";
 
-// async function getUserName() {
-//   try {
-//     const currentUN = await Auth.currentUserInfo();
-//     console.log("auth", Auth, "UN", currentUN);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+async function getUserName() {
+  try {
+    const currentUN = await Auth.currentUserInfo();
+    console.log("auth", Auth, "UN", currentUN);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 function App() {
-  // Auth.currentUserInfo();
-  // getUserName();
+  Auth.currentUserInfo();
+  getUserName();
+
   return (
     <div className="App">
       <Header />

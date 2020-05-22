@@ -17,21 +17,21 @@ const UpdateResource = ({
   boundUpdateResource,
   isToggleUpdate,
   setIsToggleUpdate,
+  isRender,
+  setIsRender,
 }) => {
   const classes = useStyles();
 
   let instructor, data, uuid, url, urlTitle, urlDescription;
 
-  //subscription to handle render updated
-
   return (
     <div>
       <form
         style={styles.formStyle}
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           boundUpdateResource &&
-            boundUpdateResource({
+            (await boundUpdateResource({
               id: resource.id,
               instructor: instructor.value,
               data: data.value,
@@ -43,8 +43,9 @@ const UpdateResource = ({
                 urlDescription.value === ""
                   ? resource.urlDescription
                   : urlDescription.value,
-            });
-          setIsToggleUpdate(!isToggleUpdate);
+            }));
+          await setIsToggleUpdate(!isToggleUpdate);
+          await setIsRender(!isRender);
         }}
       >
         <Typography className={classes.typography}>

@@ -3,25 +3,18 @@ import Resource from "./Resource";
 
 const ResourceList = ({
   boundAttemptGetResources,
-  boundAttemptGetS3Resources,
+  // boundAttemptGetS3Resources,
   boundUpdateResourceRequest,
   boundAttemptDeleteResource,
-  boundAttemptDeleteS3Resource,
+  // boundAttemptDeleteS3Resource,
   resources,
   s3Resources,
 }) => {
+  const [isRender, setIsRender] = useState(false);
+
   useEffect(() => {
-    async function fetch() {
-      await boundAttemptGetS3Resources();
-      await boundAttemptGetResources();
-    }
-    fetch();
-  }, []);
-
-  //subscription
-  //
-
-  console.log("Resources from ResourceList", resources);
+    boundAttemptGetResources();
+  }, [isRender]);
 
   return (
     <div>
@@ -33,7 +26,9 @@ const ResourceList = ({
               s3Resources={s3Resources}
               boundAttemptDeleteResource={boundAttemptDeleteResource}
               boundUpdateResourceRequest={boundUpdateResourceRequest}
-              boundAttemptDeleteS3Resource={boundAttemptDeleteS3Resource}
+              isRender={isRender}
+              setIsRender={setIsRender}
+              // boundAttemptDeleteS3Resource={boundAttemptDeleteS3Resource}
             />
           </div>
         ) : (

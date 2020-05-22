@@ -1,31 +1,34 @@
 import { combineReducers } from "redux";
 
 import { createResourceReducer } from "./createResourceReducer";
-import { getResourcesReducer } from "./getResourceReducer";
-import { deleteResourceReducer } from "./deleteResourceReducer";
-import { updateResourceReducer } from "./updateResourceReducer";
-import { createS3ResourceReducer } from "./createS3ResourceReducer";
-import { getS3ResourceReducer } from "./getS3ResourceReducer";
-import { createPostReducer } from "./createPostReducer";
-import { getPostsReducer } from "./getPostsReducer";
-import { updatePostReducer } from "./updatePostReducer";
-import { deleteS3ResourceReducer } from "./deleteS3ResourceReducer";
-import { getUserProfileReducer } from "./getUserProfileReducer";
 import { createUserProfileReducer } from "./createUserProfileReducer";
+import { createPostReducer } from "./createPostReducer";
+
+import { deleteResourceReducer } from "./deleteResourceReducer";
+// import { deleteS3ResourceReducer } from "./deleteS3ResourceReducer";
+import { deletePostReducer } from "./deletePostReducer";
+
+import { getResourcesReducer } from "./getResourceReducer";
+// import { getS3ResourceReducer } from "./getS3ResourceReducer";
+import { getPostsReducer } from "./getPostsReducer";
+import { getUserProfileReducer } from "./getUserProfileReducer";
+
+import { updateResourceReducer } from "./updateResourceReducer";
+import { updatePostReducer } from "./updatePostReducer";
 import { updateUserProfileReducer } from "./updateUserProfileReducer";
 
 export const rootReducer = combineReducers({
   createResourceReducer,
   getResourcesReducer,
   deleteResourceReducer,
+  // deleteS3ResourceReducer,
   updateResourceReducer,
-  createS3ResourceReducer,
-  getS3ResourceReducer,
   createPostReducer,
   getPostsReducer,
   updatePostReducer,
-  deleteS3ResourceReducer,
   getUserProfileReducer,
   createUserProfileReducer,
   updateUserProfileReducer,
+  // getS3ResourceReducer,
+  deletePostReducer,
 });

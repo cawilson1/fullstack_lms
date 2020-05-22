@@ -5,8 +5,10 @@ import { S3Image } from "aws-amplify-react";
 const Resource = ({
   resource,
   boundAttemptDeleteResource,
-  boundAttemptDeleteS3Resource,
+  // boundAttemptDeleteS3Resource,
   s3Resources,
+  isRender,
+  setIsRender,
 }) => {
   const [isToggleUpdate, setIsToggleUpdate] = useState(false);
   const [hasS3Resource, setHasS3Resource] = useState(false);
@@ -24,12 +26,9 @@ const Resource = ({
     return mm + "/" + dd + "/" + yy + " at " + hr + ":" + min;
   }
 
-  function removeResource(id, key = "") {
-    if (hasS3Resource) {
-      boundAttemptDeleteResource(id);
-      boundAttemptDeleteS3Resource(key);
-    } else boundAttemptDeleteResource(id);
-  }
+  // function removeResource(id, s3) {
+  //   boundAttemptDeleteResource(id, s3);
+  // }
 
   useEffect(() => {
     const matchKey = (s3Resource) => {
@@ -46,6 +45,8 @@ const Resource = ({
     <div>
       {isToggleUpdate ? (
         <UpdateResourceContainer
+          isRender={isRender}
+          setIsRender={setIsRender}
           resource={resource}
           setIsToggleUpdate={setIsToggleUpdate}
           isToggleUpdate={isToggleUpdate}
@@ -74,11 +75,10 @@ const Resource = ({
             )}
           </div>
           <button
-            onClick={() =>
-              hasS3Resource
-                ? removeResource(resource.id, s3)
-                : removeResource(resource.id)
-            }
+            onClick={async () => {
+              await boundAttemptDeleteResource(resource.id, s3);
+              await setIsRender(!isRender);
+            }}
           >
             Delete Resource
           </button>
