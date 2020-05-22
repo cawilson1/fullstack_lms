@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import { navigate } from "@reach/router";
 
 import { createResource } from "../graphql/mutations";
-import { onCreateResource } from "../graphql/subscriptions";
 
 export const CREATE_RESOURCE_SUCCESS = "CREATE_RESOURCE_SUCCESS";
 export const CREATE_RESOURCE_ERROR = "CREATE_RESOURCE_ERROR";
@@ -34,15 +33,6 @@ const createResourceError = () => {
 const attemptCreateResource = async (dispatch, resource) => {
   dispatch(createResourceRequest(resource));
   try {
-    // *****TRYING IN RESOURCELIST COMPONENT *****
-    // subscription = await API.graphql(
-    //   graphqlOperation(onCreateResource)
-    // ).subscribe({
-    //   next: (response) => {
-    //     console.log("Subscription response", response);
-    //   },
-    // });
-
     let imageResponse = "";
 
     if (resource.file !== "") {
@@ -84,18 +74,3 @@ export const createResourceInjector = (dispatch) => {
     attemptCreateResource(dispatch, resource);
   };
 };
-
-// async function subscribeResource() {
-//   try {
-//     const subscription = await API.graphql(
-//       graphqlOperation(onCreateResource)
-//     ).subscribe({
-//       next: (response) => {
-//         console.log("Subscription response", response);
-//       },
-//     });
-//     return subscription;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }

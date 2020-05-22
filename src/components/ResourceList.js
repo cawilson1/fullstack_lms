@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { onCreateResource } from "../graphql/subscriptions";
 import { API, graphqlOperation } from "aws-amplify";
 
+import {
+  onCreateResource,
+  onUpdateResource,
+  onDeleteResource,
+} from "../graphql/subscriptions";
 import Resource from "./Resource";
 
 const ResourceList = ({
@@ -12,6 +16,8 @@ const ResourceList = ({
   s3Resources,
 }) => {
   const [isRender, setIsRender] = useState(false);
+
+  console.log("Resources, maybe we can see sort", resources);
 
   useEffect(() => {
     boundAttemptGetResources();
@@ -32,6 +38,36 @@ const ResourceList = ({
     return () => subscription.unsubscribe();
   }, [resources]);
 
+  useEffect(() => {
+    const subscription = API.graphql(
+      graphqlOperation(onUpdateResource)
+    ).subscribe({
+      next: (response) => {
+        console.log(
+          "Update subscription rec'd",
+          response.value.data.onUpdateResource
+        );
+        boundAttemptGetResources();
+      },
+    });
+    return () => subscription.unsubscribe();
+  }, [resources]);
+
+  useEffect(() => {
+    const subscription = API.graphql(
+      graphqlOperation(onDeleteResource)
+    ).subscribe({
+      next: (response) => {
+        console.log(
+          "Update subscription rec'd",
+          response.value.data.onDeleteResource
+        );
+        boundAttemptGetResources();
+      },
+    });
+    return () => subscription.unsubscribe();
+  }, [resources]);
+
   return (
     <div>
       {resources.map((resource) => {
@@ -42,8 +78,10 @@ const ResourceList = ({
               s3Resources={s3Resources}
               boundAttemptDeleteResource={boundAttemptDeleteResource}
               boundUpdateResourceRequest={boundUpdateResourceRequest}
+              boundAttemptGetResources={boundAttemptGetResources}
               isRender={isRender}
               setIsRender={setIsRender}
+              resources={resources}
             />
           </div>
         ) : (
