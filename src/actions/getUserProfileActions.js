@@ -33,8 +33,6 @@ const attemptGetProfile = async (dispatch) => {
       method: "get",
       url: `https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/user?username=${username}`,
     });
-    // response.data &&
-    // console.log("GetProfileResponse", response.data);
     dispatch(getProfileSuccess(response.data[0][0]));
   } catch (error) {
     dispatch(getProfileError());

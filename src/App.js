@@ -1,61 +1,35 @@
 import React from "react";
 import "./App.css";
-import { Router, Link } from "@reach/router";
-// import { API, graphqlOperation } from "aws-amplify";
-// import { createResource } from "./graphql/mutations";
+import { Router } from "@reach/router";
 import { Auth } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 
 import Header from "./components/Header";
-import Nav from "./components/Nav";
-import EditUserProfile from "./components/EditUserProfile";
 import Post from "./components/Post";
-import PostInput from "./components/PostInput";
-import PostsList from "./components/PostsList";
-import Resource from "./components/Resource";
 import ResourceInputContainer from "./containers/ResourceInputContainer";
 import ResourcesListContainer from "./containers/ResourcesListContainer";
 import PostInputContainer from "./containers/PostInputContainer";
 import PostsListContainer from "./containers/PostsListContainer";
 import UserProfileContainer from "./containers/UserProfileContainer";
 import UserProfileInputContainer from "./containers/UserProfileInputContainer";
-// import UpdateUserProfileContainer from "./containers/UpdateUserProfileContainer";
+import NavContainer from "./containers/NavContainer";
 import Landing from "./components/Landing";
 
-async function getUserName() {
-  try {
-    const currentUN = await Auth.currentUserInfo();
-    console.log("auth", Auth, "UN", currentUN);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 function App() {
-  Auth.currentUserInfo();
-  getUserName();
-
   return (
     <div className="App">
-      <Header />
-      <Nav />
+      <NavContainer />
       <div style={styles.universal}>
+        <Header />
         <Router>
           <UserProfileContainer path="profile" />
           <UserProfileInputContainer path="create_profile" />
-          {/* <UpdateUserProfileContainer path="profile_edit" /> */}
-          {/* </Profile> */}
           <Landing path="/" />
           <ResourcesListContainer path="resource_list" />
-          {/* <Resource path="resource" /> */}
           <ResourceInputContainer path="resource_input" />
-          {/* </ResourcesListContainer> */}
           <PostsListContainer path="post_list" />
-          {/* <PostsList path="post_list" /> */}
           <Post path="post" />
           <PostInputContainer path="post_input" />
-          {/* <PostInput path="post_input" /> */}
-          {/* </PostsListContainer> */}
         </Router>
       </div>
     </div>
@@ -67,6 +41,7 @@ export default withAuthenticator(App);
 const styles = {
   universal: {
     display: "flex",
+    flexDirection: "column",
     marginLeft: "20vw",
     justifyContent: "center",
   },

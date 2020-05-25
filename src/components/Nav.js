@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, navigate } from "@reach/router";
+import { navigate } from "@reach/router";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 import { Auth } from "aws-amplify";
 
@@ -13,9 +13,8 @@ import downtown from "../assets/stockChs.jpg";
 import JRSHarbor from "../assets/harborJRSlogo.jpg";
 import defaultAvatar from "../assets/avatar-png-transparent-4.png";
 
-export default function Nav() {
+export default function Nav({ firstname, lastname, avatar, boundLoadProfile }) {
   const classes = useStyles();
-
   const [username, setUsername] = useState("");
 
   useEffect(() => {
@@ -27,18 +26,27 @@ export default function Nav() {
     getUsername();
   }, []);
 
+  // useEffect(() => {
+  //   const loadProfile = async () => {
+  //     await boundLoadProfile();
+  //   };
+  //   loadProfile();
+  // }, []);
+
   //Profile undefined here, need to bring in from somewhere for avatar switch...
+  console.log("Profile stuff", firstname, avatar);
+  console.log("AUTH ANYWHERE", Auth);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <div className={classes.avatarContainer}>
-          {/* {profile.avatar === "" ? ( */}
-          <img src={defaultAvatar} className={classes.avatar} />
-          {/* ) : (
-            <img src={profile.avatar} className={classes.avatar} />
-          )} */}
-        </div>
+        {/* <div className={classes.avatarContainer}>
+          {avatar && avatar === "" ? (
+            <img src={defaultAvatar} className={classes.avatar} />
+          ) : (
+            <img src={avatar} className={classes.avatar} />
+          )}
+        </div> */}
         <div className={classes.welcome}>Welcome, {username}!</div>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
@@ -122,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexGrow: 1,
-    width: "20vw",
+    minWidth: "20vw",
     position: "fixed",
     top: 0,
     left: 0,
@@ -138,26 +146,3 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "10vw",
   },
 }));
-
-// import React from "react";
-// import { Link } from "@reach/router";
-// import { AmplifySignOut } from "@aws-amplify/ui-react";
-
-// const Nav = () => {
-//   return (
-//     <>
-//       <Link to="profile">My Profile</Link>{" "}
-//       <Link to="create_profile"> Create Profile</Link>{" "}
-//       <Link to="post_list">Posts</Link>
-//       <Link to="post_input">
-//         Create Post
-//       </Link> <Link to="/">Resources</Link>{" "}
-//       <Link to="resource_input">Add Resource</Link>
-//       <div style={styles.SignOut}>
-//         <AmplifySignOut />
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Nav;

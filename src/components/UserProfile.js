@@ -9,23 +9,21 @@ const UserProfile = ({ profile, status, boundGetUserProfile }) => {
     window.location.assign(profile.github);
   };
 
-  console.log(profile, "PROFILE");
-
   useEffect(() => {
     boundGetUserProfile();
   }, []);
 
   return status === "GET_PROFILE_SUCCESS" ? (
     isToggle ? (
-      <div>
+      <div style={styles.profileCard}>
         <h3> User Profile Info for {profile.username} </h3>
         {profile.avatar === "" ? (
-          <div style={styles.avatar}>
-            <img src={defaultAvatar} />
+          <div>
+            <img src={defaultAvatar} style={styles.avatar} />
           </div>
         ) : (
-          <div style={styles.avatar}>
-            <img src={profile.avatar} />
+          <div>
+            <img src={profile.avatar} style={styles.avatar} />
           </div>
         )}
         <p>First: {profile.firstname}</p>
@@ -50,6 +48,13 @@ const UserProfile = ({ profile, status, boundGetUserProfile }) => {
 };
 
 const styles = {
+  profileCard: {
+    boxShadow: "0 4px 8px 0 silver",
+    transition: "0.3s",
+    width: "50vw",
+    padding: "2px 16px",
+    justifyContent: "center",
+  },
   linkButton: {
     border: "none",
   },
