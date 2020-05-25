@@ -80,10 +80,12 @@ const EditUserProfile = ({
           accept="image/*"
           id="s3-avatar"
           onChange={(e) => {
-            setAvatar(e.target.files[0]);
+            setAvatar(e.target.files[0].name);
           }}
         />
+        <img src={profile.avatar} style={styles.avatar} />
         <button type="submit">Submit</button>
+        <button onClick={() => setIsToggle(!isToggle)}>Cancel</button>
       </form>
     </div>
   );

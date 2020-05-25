@@ -20,6 +20,7 @@ import PostsListContainer from "./containers/PostsListContainer";
 import UserProfileContainer from "./containers/UserProfileContainer";
 import UserProfileInputContainer from "./containers/UserProfileInputContainer";
 // import UpdateUserProfileContainer from "./containers/UpdateUserProfileContainer";
+import Landing from "./components/Landing";
 
 async function getUserName() {
   try {
@@ -38,24 +39,35 @@ function App() {
     <div className="App">
       <Header />
       <Nav />
-      <Router>
-        <UserProfileContainer path="profile" />
-        <UserProfileInputContainer path="create_profile" />
-        {/* <UpdateUserProfileContainer path="profile_edit" /> */}
-        {/* </Profile> */}
-        <ResourcesListContainer path="/" />
-        {/* <Resource path="resource" /> */}
-        <ResourceInputContainer path="resource_input" />
-        {/* </ResourcesListContainer> */}
-        <PostsListContainer path="post_list" />
-        {/* <PostsList path="post_list" /> */}
-        <Post path="post" />
-        <PostInputContainer path="post_input" />
-        {/* <PostInput path="post_input" /> */}
-        {/* </PostsListContainer> */}
-      </Router>
+      <div style={styles.universal}>
+        <Router>
+          <UserProfileContainer path="profile" />
+          <UserProfileInputContainer path="create_profile" />
+          {/* <UpdateUserProfileContainer path="profile_edit" /> */}
+          {/* </Profile> */}
+          <Landing path="/" />
+          <ResourcesListContainer path="resource_list" />
+          {/* <Resource path="resource" /> */}
+          <ResourceInputContainer path="resource_input" />
+          {/* </ResourcesListContainer> */}
+          <PostsListContainer path="post_list" />
+          {/* <PostsList path="post_list" /> */}
+          <Post path="post" />
+          <PostInputContainer path="post_input" />
+          {/* <PostInput path="post_input" /> */}
+          {/* </PostsListContainer> */}
+        </Router>
+      </div>
     </div>
   );
 }
 
 export default withAuthenticator(App);
+
+const styles = {
+  universal: {
+    display: "flex",
+    marginLeft: "20vw",
+    justifyContent: "center",
+  },
+};

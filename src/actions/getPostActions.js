@@ -1,5 +1,7 @@
 import { API, graphqlOperation } from "aws-amplify";
+
 import { listPosts } from "../graphql/queries";
+import { sortByDate } from "../actions/sortByDate";
 
 export const GET_POSTS_REQUEST = "GET_POSTS_REQUEST";
 export const GET_POSTS_SUCCESS = "GET_POSTS_SUCCESS";
@@ -28,7 +30,8 @@ const attemptGetPosts = async (dispatch) => {
   dispatch(getPostsRequest());
   try {
     const response = await API.graphql(graphqlOperation(listPosts));
-    response.data && dispatch(getPostsSuccess(response.data.listPosts.items));
+    const sortedPosts = sortByDate(response.data.listPosts.items);
+    dispatch(getPostsSuccess(sortedPosts));
     // console.log("Get Posts Success", response.data.listPosts.items);
   } catch (error) {
     dispatch(getPostsError());
