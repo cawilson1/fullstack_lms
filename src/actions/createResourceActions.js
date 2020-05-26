@@ -61,7 +61,7 @@ const attemptCreateResource = async (dispatch, resource) => {
     ).then((response) => {
       console.log("CreateResourceResponse", response);
       dispatch(createResourceSuccess());
-      navigate("/");
+      navigate("resource_list");
     });
   } catch (error) {
     dispatch(createResourceError());

@@ -1,10 +1,4 @@
-type Resource
-  @model
-  @key(
-    name: "byUpdatedAt"
-    fields: ["id", "updatedAt"]
-    queryField: "resourcesByUpdatedAt"
-  ) {
+type Resource @model {
   id: ID!
   instructor: String!
   data: String
@@ -12,8 +6,8 @@ type Resource
   urlTitle: String
   urlDescription: String
   url: String
-  createdAt: AWSDateTime!
-  updatedAt: AWSDateTime!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
 
 type Post @model {
@@ -21,6 +15,6 @@ type Post @model {
   author: String!
   data: String!
   uuid: String
-  createdAt: AWSDateTime!
-  updatedAt: AWSDateTime!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }

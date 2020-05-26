@@ -2,6 +2,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { Storage } from "aws-amplify";
 
 import { listResources } from "../graphql/queries";
+import { sortByDate } from "../actions/sortByDate";
 
 export const GET_RESOURCES_REQUEST = "GET_RESOURCES_REQUEST";
 export const GET_RESOURCES_SUCCESS = "GET_RESOURCES_SUCCESS";
@@ -40,10 +41,8 @@ const attemptGetResources = async (dispatch) => {
         limit: 20,
       })
     );
-    response.data &&
-      dispatch(
-        getResourcesSuccess(response.data.listResources.items, s3Resources)
-      );
+    const sortedResources = sortByDate(response.data.listResources.items);
+    dispatch(getResourcesSuccess(sortedResources, s3Resources));
   } catch (error) {
     dispatch(getResourcesError());
     console.error("attemptGetResourcesError", error);

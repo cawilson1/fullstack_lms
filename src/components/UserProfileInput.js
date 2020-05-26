@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
+import { navigate } from "@reach/router";
 
-const UserProfileInput = ({ boundUserCreateProfile }) => {
+const UserProfileInput = ({
+  boundUserCreateProfile,
+  setIsProfile,
+  isProfile,
+}) => {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
 
@@ -20,10 +25,10 @@ const UserProfileInput = ({ boundUserCreateProfile }) => {
     <div>
       <form
         style={styles.formStyle}
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           boundUserCreateProfile &&
-            boundUserCreateProfile({
+            (await boundUserCreateProfile({
               username: username,
               firstname: firstnameInput.value,
               lastname: lastnameInput.value,
@@ -31,7 +36,9 @@ const UserProfileInput = ({ boundUserCreateProfile }) => {
               bio: bioInput.value,
               github: githubInput.value,
               avatar: avatar,
-            });
+            }));
+          await setIsProfile(true);
+          await navigate("/");
         }}
       >
         <h3>{username}, finish creating your profile below:</h3>
