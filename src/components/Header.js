@@ -1,10 +1,9 @@
 import React from "react";
-import { AmplifySignOut } from "@aws-amplify/ui-react";
 
 const Header = () => {
   return (
     <>
-      <h2>Header - Title of Webpage</h2>
+      <h2>JRS Code School - Learning Management System</h2>
     </>
   );
 };

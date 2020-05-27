@@ -15,36 +15,38 @@ import UserProfileContainer from "./containers/UserProfileContainer";
 import UserProfileInputContainer from "./containers/UserProfileInputContainer";
 import NavContainer from "./containers/NavContainer";
 import Landing from "./components/Landing";
+import NavDrawer from "./components/NavDrawer";
 
 function App() {
   const [isProfile, setIsProfile] = useState(false);
 
-  useEffect(() => {
-    const checkProfileExists = async () => {
-      let userInfo = await Auth.currentUserInfo();
-      let userName = await userInfo.username;
-      console.log("meow", userName);
-      let checkDb = await axios({
-        method: "get",
-        url: `https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/user?username=${userName}`,
-      });
-      if (checkDb) {
-        console.log("true", true);
-        return setIsProfile(true);
-      } else {
-        console.log("false", false);
-        return setIsProfile(false);
-      }
-    };
-    checkProfileExists();
-  }, []);
+  // useEffect(() => {
+  //   const checkProfileExists = async () => {
+  //     let userInfo = await Auth.currentUserInfo();
+  //     let userName = await userInfo.username;
+  //     console.log("meow", userName);
+  //     let checkDb = await axios({
+  //       method: "get",
+  //       url: `https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/user?username=${userName}`,
+  //     });
+  //     if (checkDb) {
+  //       console.log("true", true);
+  //       return setIsProfile(true);
+  //     } else {
+  //       console.log("false", false);
+  //       return setIsProfile(false);
+  //     }
+  //   };
+  //   checkProfileExists();
+  // }, []);
 
   return (
     <div className="App">
-      <NavContainer />
+      {/* <NavContainer /> */}
+      <NavDrawer />
       <div style={styles.universal}>
-        <Header />
-        {isProfile ? (
+        {/* <Header /> */}
+        {/* {isProfile ? (
           <Router>
             <UserProfileContainer
               path="profile"
@@ -61,8 +63,8 @@ function App() {
           </Router>
         ) : (
           <UserProfileInputContainer path="create_profile" />
-        )}
-        {/* <Router>
+        )} */}
+        <Router>
           <UserProfileContainer path="profile" />
           <Landing path="/" />
           <ResourcesListContainer path="resource_list" />
@@ -70,7 +72,7 @@ function App() {
           <PostsListContainer path="post_list" />
           <Post path="post" />
           <PostInputContainer path="post_input" />
-        </Router> */}
+        </Router>
       </div>
     </div>
   );
@@ -82,7 +84,9 @@ const styles = {
   universal: {
     display: "flex",
     flexDirection: "column",
-    marginLeft: "20vw",
+    marginLeft: "10vw",
+    marginRight: "10vw",
+    marginTop: "10vw",
     justifyContent: "center",
   },
 };

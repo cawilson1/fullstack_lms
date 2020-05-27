@@ -48,52 +48,70 @@ const UpdateResource = ({
           await setIsRender(!isRender);
         }}
       >
-        <Typography className={classes.typography}>
-          <input
-            id="instructor"
-            type="text"
-            defaultValue={resource.instructor}
-            ref={(node) => (instructor = node)}
-          />
-          <textarea
-            id="data"
-            type="text"
-            defaultValue={resource.data}
-            ref={(node) => (data = node)}
-          ></textarea>
-          <input
-            id="url"
-            type="text"
-            defaultValue={resource.url}
-            ref={(node) => (url = node)}
-          />
-          <input
-            id="urlTitle"
-            type="text"
-            defaultValue={resource.urlTitle}
-            ref={(node) => (urlTitle = node)}
-          />
-          <input
-            id="urlDescription"
-            type="text"
-            defaultValue={resource.urlDescription}
-            ref={(node) => (urlDescription = node)}
-          />
-          <input
-            id="uuid"
-            type="text"
-            defaultValue={resource.uuid}
-            ref={(node) => (uuid = node)}
-          />
+        <input
+          id="instructor"
+          type="text"
+          defaultValue={resource.instructor}
+          ref={(node) => (instructor = node)}
+          style={styles.inputs}
+        />
+        <label htmlFor="data">Body of Post:</label>
+        <textarea
+          id="data"
+          type="text"
+          defaultValue={resource.data}
+          ref={(node) => (data = node)}
+          style={styles.textarea}
+        ></textarea>
+        <label htmlFor="url">URL of Online Resource</label>
+        <input
+          id="url"
+          type="text"
+          defaultValue={resource.url}
+          ref={(node) => (url = node)}
+          style={styles.inputs}
+        />
+        <label htmlFor="urlTitle">Title of Online Resource:</label>
+        <input
+          id="urlTitle"
+          type="text"
+          defaultValue={resource.urlTitle}
+          ref={(node) => (urlTitle = node)}
+          style={styles.inputs}
+        />
+        <label htmlFor="urlDescription">Summary of Online Resource:</label>
+        <input
+          id="urlDescription"
+          type="text"
+          defaultValue={resource.urlDescription}
+          ref={(node) => (urlDescription = node)}
+          style={styles.inputs}
+        />
+        <input
+          id="uuid"
+          type="text"
+          defaultValue={resource.uuid}
+          ref={(node) => (uuid = node)}
+        />
+        <div style={styles.buttonWrapper}>
           <Button
-            // aria-describedby={id}
+            style={styles.button}
+            size="small"
             variant="contained"
             color="primary"
             type="submit"
           >
             Submit Changes
           </Button>
-        </Typography>
+          <Button
+            style={styles.button}
+            size="small"
+            variant="contained"
+            onClick={() => setIsToggleUpdate(!isToggleUpdate)}
+          >
+            Cancel
+          </Button>
+        </div>
       </form>
     </div>
   );
@@ -106,5 +124,34 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  inputs: {
+    width: 250,
+    marginBottom: 10,
+    marginTop: 4,
+    borderRadius: 8,
+    border: "1px solid black",
+    boxShadow: "inset 0px 0px 1.5px 1.5px gray",
+    padding: 10,
+    fontFamily: "sans-serif",
+  },
+  textarea: {
+    width: 250,
+    margin: 20,
+    height: 100,
+    borderRadius: 8,
+    marginBottom: 10,
+    marginTop: 4,
+    border: "1px solid black",
+    boxShadow: "inset 0px 0px 1.5px 1.5px gray",
+    padding: 10,
+    fontFamily: "sans-serif",
+  },
+  buttonWrapper: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  buttons: {
+    margin: "10px",
   },
 };

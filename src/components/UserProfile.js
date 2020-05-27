@@ -10,8 +10,12 @@ const UserProfile = ({ profile, status, boundGetUserProfile }) => {
   };
 
   useEffect(() => {
+    // let mounted = true;
+    // if (mounted) {
     boundGetUserProfile();
-  }, []);
+    // }
+    // return () => (mounted = false);
+  }, [isToggle]);
 
   return status === "GET_PROFILE_SUCCESS" ? (
     isToggle ? (
@@ -43,7 +47,7 @@ const UserProfile = ({ profile, status, boundGetUserProfile }) => {
       />
     )
   ) : (
-    <p>Loading</p>
+    <p>Loading...</p>
   );
 };
 
@@ -52,20 +56,18 @@ const styles = {
     boxShadow: "0 4px 8px 0 silver",
     transition: "0.3s",
     width: "50vw",
-    padding: "2px 16px",
-    justifyContent: "center",
+    padding: "20px 20px",
+    marginLeft: "10vw",
   },
   linkButton: {
     border: "none",
   },
   avatar: {
-    verticalAlign: "middle",
     width: "200px",
     height: "200px",
     borderRadius: "50%",
     border: "2px solid black",
     margin: "auto",
-    // background: `url(${defaultAvatar})`,
   },
 };
 

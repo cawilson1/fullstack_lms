@@ -9,7 +9,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
-import downtown from "../assets/stockChs.jpg";
 import JRSHarbor from "../assets/harborJRSlogo.jpg";
 import defaultAvatar from "../assets/avatar-png-transparent-4.png";
 
@@ -17,14 +16,14 @@ export default function Nav({ firstname, lastname, avatar, boundLoadProfile }) {
   const classes = useStyles();
   const [username, setUsername] = useState("");
 
-  useEffect(() => {
-    const getUsername = async () => {
-      const useAuth = await Auth.currentUserInfo();
-      const gotUser = await useAuth.username;
-      setUsername(gotUser);
-    };
-    getUsername();
-  }, []);
+  // useEffect(() => {
+  //   const getUsername = async () => {
+  //     const useAuth = await Auth.currentUserInfo();
+  //     const gotUser = await useAuth.username;
+  //     setUsername(gotUser);
+  //   };
+  //   getUsername();
+  // }, []);
 
   // useEffect(() => {
   //   const loadProfile = async () => {
@@ -34,19 +33,24 @@ export default function Nav({ firstname, lastname, avatar, boundLoadProfile }) {
   // }, []);
 
   //Profile undefined here, need to bring in from somewhere for avatar switch...
-  console.log("Profile stuff", firstname, avatar);
-  console.log("AUTH ANYWHERE", Auth);
+  // console.log("Profile stuff", firstname, avatar);
+  // console.log("AUTH ANYWHERE", Auth);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        {/* <div className={classes.avatarContainer}>
-          {avatar && avatar === "" ? (
+        <div className={classes.avatarContainer}>
+          {/* {avatar && avatar === "" ? (
             <img src={defaultAvatar} className={classes.avatar} />
           ) : (
             <img src={avatar} className={classes.avatar} />
-          )}
-        </div> */}
+          )} */}
+          <img
+            src={require("../assets/JRSLogo.jpg")}
+            className={classes.avatar}
+          />
+        </div>
+
         <div className={classes.welcome}>Welcome, {username}!</div>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>

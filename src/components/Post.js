@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import UpdatePostContainer from "../containers/UpdatePostContainer";
+import Button from "@material-ui/core/Button";
 
 const Post = ({
   post,
@@ -34,7 +35,7 @@ const Post = ({
           setIsRender={setIsRender}
         />
       ) : (
-        <div>
+        <div style={styles.postLayout}>
           <h4>Start of Post by {post.author}</h4>
           <p>Created: {adjustedDate(post.createdAt)}</p>
           {post.createdAt === post.updatedAt ? (
@@ -44,22 +45,30 @@ const Post = ({
           )}
 
           <p>{post.data}</p>
-
-          <button
-            onClick={async () => {
-              await boundAttemptDeletePost(post.id);
-              await setIsRender(!isRender);
-            }}
-          >
-            Delete Post
-          </button>
-          <button
-            onClick={() => {
-              setIsToggleUpdate(!isToggleUpdate);
-            }}
-          >
-            Update Post
-          </button>
+          <div style={styles.buttonWrapper}>
+            <Button
+              size="small"
+              style={styles.buttons}
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setIsToggleUpdate(!isToggleUpdate);
+              }}
+            >
+              Update Post
+            </Button>
+            <Button
+              style={styles.buttons}
+              variant="contained"
+              color="secondary"
+              onClick={async () => {
+                await boundAttemptDeletePost(post.id);
+                await setIsRender(!isRender);
+              }}
+            >
+              Delete Post
+            </Button>
+          </div>
           <p>-------</p>
         </div>
       )}
@@ -68,3 +77,20 @@ const Post = ({
 };
 
 export default Post;
+
+const styles = {
+  postLayout: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "left",
+  },
+  buttonWrapper: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  buttons: {
+    margin: "10px",
+    secondary: "red",
+  },
+};
