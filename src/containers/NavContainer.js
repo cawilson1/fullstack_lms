@@ -1,14 +1,14 @@
 import { connect } from "react-redux";
-import Nav from "../components/Nav";
+import NavDrawer from "../components/NavDrawer";
 import { getProfileInjector } from "../actions/getUserProfileActions";
 
-const mapStateToProps = (state) => {
-  return {
-    firstname: state.getUserProfileReducer.profile.firstname,
-    lastname: state.getUserProfileReducer.profile.lastname,
-    avatar: state.getUserProfileReducer.profile.avatar,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     firstname: state.getUserProfileReducer.profile.firstname,
+//     lastname: state.getUserProfileReducer.profile.lastname,
+//     avatar: state.getUserProfileReducer.profile.avatar,
+//   };
+// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -16,6 +16,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const NavContainer = connect(mapStateToProps, mapDispatchToProps)(Nav);
+const NavContainer = connect(null, mapDispatchToProps)(NavDrawer);
 
 export default NavContainer;

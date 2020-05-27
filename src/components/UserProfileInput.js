@@ -4,8 +4,8 @@ import { navigate } from "@reach/router";
 
 const UserProfileInput = ({
   boundUserCreateProfile,
-  setIsProfile,
-  isProfile,
+  // setIsProfile,
+  // isProfile,
 }) => {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -37,7 +37,7 @@ const UserProfileInput = ({
               github: githubInput.value,
               avatar: avatar,
             }));
-          await setIsProfile(true);
+          // await setIsProfile(true);
           await navigate("/");
         }}
       >

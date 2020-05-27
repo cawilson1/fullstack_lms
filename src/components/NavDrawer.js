@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    marginLeft: "35px",
   },
   titleDiv: {
     display: "flex",
@@ -172,13 +173,6 @@ export default function NavDrawer() {
           </MenuItem>
           <MenuItem
             className={classes.list}
-            onClick={() => navigate("create_profile")}
-          >
-            {" "}
-            Create Profile
-          </MenuItem>
-          <MenuItem
-            className={classes.list}
             onClick={() => navigate("post_list")}
           >
             Posts
@@ -216,7 +210,10 @@ export default function NavDrawer() {
             margin: "auto",
           }}
         >
-          <div className={classes.signOut}>
+          <div
+            className={classes.signOut}
+            onClick={() => alert("clear everything")}
+          >
             <AmplifySignOut />
           </div>
         </MenuList>
