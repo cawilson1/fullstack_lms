@@ -33,7 +33,6 @@ const attemptCreatePostRequest = async (dispatch, post) => {
       })
     );
     dispatch(createPostSuccess());
-    console.log("POST RESPONSE", response);
   } catch (error) {
     dispatch(createPostError());
     console.error("Error Creating Post", error);

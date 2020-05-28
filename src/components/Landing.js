@@ -55,8 +55,8 @@ const styles = {
     margin: "30px",
   },
   pic: {
-    width: "220px",
-    height: "100px",
+    width: "250px",
+    height: "auto",
     horizontalAlign: "center",
   },
 };

@@ -28,21 +28,17 @@ const createResourceError = () => {
   };
 };
 
-// let subscription;
-
 const attemptCreateResource = async (dispatch, resource) => {
   dispatch(createResourceRequest(resource));
   try {
     let imageResponse = "";
-
     if (resource.file !== "") {
       let fileExt = resource.file.name.split(".")[1];
       let uuid = uuidv4() + "." + fileExt;
       // "image/*, .pdf, .txt, .doc, .docx, .json"
-
       imageResponse = await Storage.put("test/" + uuid, resource.file, {
         contentType: "image/png",
-        //file ext?
+        //file ext would be blown out here
       });
     }
     //need file and fileExt left out of GraphQl
@@ -59,7 +55,6 @@ const attemptCreateResource = async (dispatch, resource) => {
         input: dbResource,
       })
     ).then((response) => {
-      console.log("CreateResourceResponse", response);
       dispatch(createResourceSuccess());
       navigate("resource_list");
     });

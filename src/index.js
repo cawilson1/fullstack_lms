@@ -12,7 +12,6 @@ import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
 
 import App from "./App";
-// import "./index.css";
 
 Amplify.configure(awsExports);
 
@@ -36,7 +35,6 @@ ReactDOM.render(
   <Provider store={store}>
     <NavContainer style={styles.NavCont} />
     <App style={styles.universal} />
-    {/* <App style={styles.universal} /> */}
   </Provider>,
   document.getElementById("root")
 );

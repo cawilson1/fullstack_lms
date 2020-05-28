@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
   const [file, setFile] = useState("");
   const [instructor, setInstructor] = useState("");
-  const [boxChecked, setBoxChecked] = useState("");
 
   useEffect(() => {
     const getInstructor = async () => {

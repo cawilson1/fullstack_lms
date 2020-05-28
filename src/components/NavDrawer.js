@@ -16,7 +16,6 @@ import MenuList from "@material-ui/core/MenuList";
 
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 import { navigate } from "@reach/router";
-import { connect } from "react-redux";
 
 const drawerWidth = 240;
 

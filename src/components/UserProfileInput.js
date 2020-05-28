@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 import { navigate } from "@reach/router";
 
-const UserProfileInput = ({
-  boundUserCreateProfile,
-  // setIsProfile,
-  // isProfile,
-}) => {
+const UserProfileInput = ({ boundUserCreateProfile }) => {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("");
 
@@ -37,7 +33,6 @@ const UserProfileInput = ({
               github: githubInput.value,
               avatar: avatar,
             }));
-          // await setIsProfile(true);
           await navigate("/");
         }}
       >

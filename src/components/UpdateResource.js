@@ -10,8 +10,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//pass whole object back up thru bound in container
-
 const UpdateResource = ({
   resource,
   boundUpdateResource,

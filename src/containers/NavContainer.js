@@ -1,12 +1,6 @@
 import { connect } from "react-redux";
 import NavDrawer from "../components/NavDrawer";
 
-// const mapStateToProps = (ownProps) => {
-//   return {
-//     setIsProfile: ownProps.setIsProfile,
-//   };
-// };
-
 const mapDispatchToProps = (dispatch) => {
   return {
     boundLogOut: () => dispatch({ type: "LOGOUT" }),
