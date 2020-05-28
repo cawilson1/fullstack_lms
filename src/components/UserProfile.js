@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UpdateUserProfileContainer from "../containers/UpdateUserProfileContainer";
 import defaultAvatar from "../assets/avatar-png-transparent-4.png";
+import rogerRabbit from "../assets/rogerRabbit.jpeg";
 
 const UserProfile = ({ profile, status, boundGetUserProfile }) => {
   const [isToggle, setIsToggle] = useState(true);
@@ -10,26 +11,25 @@ const UserProfile = ({ profile, status, boundGetUserProfile }) => {
   };
 
   useEffect(() => {
-    // let mounted = true;
-    // if (mounted) {
     boundGetUserProfile();
-    // }
-    // return () => (mounted = false);
   }, [isToggle]);
 
   return status === "GET_PROFILE_SUCCESS" ? (
     isToggle ? (
       <div style={styles.profileCard}>
         <h3> User Profile Info for {profile.username} </h3>
-        {profile.avatar === "" ? (
+        {/* {profile.avatar === "" ? (
           <div>
             <img src={defaultAvatar} style={styles.avatar} />
           </div>
-        ) : (
-          <div>
-            <img src={profile.avatar} style={styles.avatar} />
-          </div>
-        )}
+        ) : ( */}
+        <div>
+          <img
+            src={require("../assets/rogerRabbit.jpeg")}
+            style={styles.avatar}
+          />
+        </div>
+        {/* )} */}
         <p>First: {profile.firstname}</p>
         <p>Last: {profile.lastname}</p>
         <p>Email:{profile.email}</p>

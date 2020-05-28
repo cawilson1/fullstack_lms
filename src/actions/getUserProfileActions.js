@@ -24,16 +24,23 @@ const getProfileError = () => {
   };
 };
 
-const attemptGetProfile = async (dispatch) => {
+export const attemptGetProfile = async (dispatch) => {
   dispatch(getProfileRequest());
+  console.log("from the actions 1");
+
   try {
+    console.log("from the actions 1b");
+
     const getUsername = await Auth.currentUserInfo();
     const username = getUsername.username;
+    console.log("from the actions 2", username);
+
     const response = await axios({
       method: "get",
       url: `https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/user?username=${username}`,
     });
     dispatch(getProfileSuccess(response.data[0][0]));
+    console.log("from the actions 3");
   } catch (error) {
     dispatch(getProfileError());
     console.error("GetProfileERR", error);
@@ -41,5 +48,6 @@ const attemptGetProfile = async (dispatch) => {
 };
 
 export const getProfileInjector = (dispatch) => {
+  console.log("The Injectorrrr");
   return () => attemptGetProfile(dispatch);
 };

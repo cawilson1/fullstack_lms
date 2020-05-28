@@ -11,11 +11,12 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
 
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 import { navigate } from "@reach/router";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
+import { connect } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -102,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavDrawer() {
+export default function NavDrawer({ boundLogOut }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -162,36 +163,57 @@ export default function NavDrawer() {
         <Divider />
 
         <MenuList>
-          <MenuItem className={classes.list} onClick={() => navigate("/")}>
+          <MenuItem
+            className={classes.list}
+            onClick={() => {
+              navigate("/");
+              handleDrawerClose();
+            }}
+          >
             Home
           </MenuItem>
           <MenuItem
             className={classes.list}
-            onClick={() => navigate("profile")}
+            onClick={() => {
+              navigate("profile");
+              handleDrawerClose();
+            }}
           >
             My Profile
           </MenuItem>
           <MenuItem
             className={classes.list}
-            onClick={() => navigate("post_list")}
+            onClick={() => {
+              navigate("post_list");
+              handleDrawerClose();
+            }}
           >
             Posts
           </MenuItem>
           <MenuItem
             className={classes.list}
-            onClick={() => navigate("post_input")}
+            onClick={() => {
+              navigate("post_input");
+              handleDrawerClose();
+            }}
           >
             Create Post
           </MenuItem>
           <MenuItem
             className={classes.list}
-            onClick={() => navigate("resource_list")}
+            onClick={() => {
+              navigate("resource_list");
+              handleDrawerClose();
+            }}
           >
             Resources
           </MenuItem>
           <MenuItem
             className={classes.list}
-            onClick={() => navigate("resource_input")}
+            onClick={() => {
+              navigate("resource_input");
+              handleDrawerClose();
+            }}
           >
             Add Resource
           </MenuItem>
@@ -212,7 +234,11 @@ export default function NavDrawer() {
         >
           <div
             className={classes.signOut}
-            onClick={() => alert("clear everything")}
+            onClick={() => {
+              boundLogOut();
+              navigate("/");
+              handleDrawerClose();
+            }}
           >
             <AmplifySignOut />
           </div>

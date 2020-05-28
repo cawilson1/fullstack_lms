@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Router } from "@reach/router";
 import { Auth } from "aws-amplify";
-import { withAuthenticator } from "@aws-amplify/ui-react";
+import { AmplifyAuthenticator, withAuthenticator } from "@aws-amplify/ui-react";
 import axios from "axios";
 import { navigate } from "@reach/router";
 
@@ -19,50 +19,57 @@ import Landing from "./components/Landing";
 import NavDrawer from "./components/NavDrawer";
 import SignIn from "./components/SignIn";
 
-function App() {
-  // const [isProfile, setIsProfile] = useState(false);
-  const [profileUsername, setProfileUsername] = useState("");
+function App({ usernameApp, boundLoadProfile }) {
+  const [username, setUsername] = useState(null);
 
-  // useEffect(() => {
-  //   const checkProfileExists = async () => {
-  //     let userInfo = await Auth.currentUserInfo();
-  //    if (!userInfo) {
-  //         navigate("sign_in");
-  //       }
-  //     let userName = await userInfo.username;
-  //     // console.log("meow", userName);
-  //     try {
-  //       let checkDb = await axios({
-  //         method: "get",
-  //         url: `https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/user?username=${userName}`,
-  //       });
-  //       console.log("CheckDb response", checkDb.data[0][0].username);
-  //     } catch (error) {
-  //       console.error(error);
-  //       navigate("create_profile");
-  //     }
-  //   };
-  //   checkProfileExists();
-  // }, []);
+  // const getUsername = async () => {
+  //   let userInfo = await Auth.currentUserInfo();
+  //   console.log("APP AUTH1", Auth.currentUserInfo());
+  //   console.log("inside the try");
+  //   let userName = await userInfo.username;
+  //   console.log("setting userName", userName);
+  //   return userName;
+  // };
+
+  const callBoundLoad = async () => {
+    console.log("inside the callBoundLoad");
+    try {
+      boundLoadProfile && boundLoadProfile();
+      console.log("hit the boundLoadProfile");
+    } catch (error) {
+      console.error("Cannot find user", error);
+    }
+  };
+
+  useEffect(() => {
+    callBoundLoad();
+  }, []);
+
+  // setUsername(getUsername());
 
   return (
+    // <AmplifyAuthenticator>
     <div className="App">
-      {/* <NavContainer /> */}
-      <NavDrawer />
-      <div style={styles.universal}>
-        <Router>
-          <UserProfileContainer path="profile" />
-          <UserProfileInputContainer path="create_profile" />
-          <Landing path="home" />
-          <SignIn path="sign_in" />
-          <ResourcesListContainer path="resource_list" />
-          <ResourceInputContainer path="resource_input" />
-          <PostsListContainer path="post_list" />
-          <Post path="post" />
-          <PostInputContainer path="post_input" />
-        </Router>
-      </div>
+      <NavContainer />
+      {/* <div>
+          {usernameApp == null ? (
+            <UserProfileInputContainer path="create_profile" />
+          ) : ( */}
+      <Router>
+        <UserProfileContainer path="profile" />
+        <UserProfileInputContainer path="create_profile" />
+        <Landing path="/" />
+        {/* <SignIn path="/" /> */}
+        <ResourcesListContainer path="resource_list" />
+        <ResourceInputContainer path="resource_input" />
+        <PostsListContainer path="post_list" />
+        <Post path="post" />
+        <PostInputContainer path="post_input" />
+      </Router>
+      {/* )}
+        </div> */}
     </div>
+    // </AmplifyAuthenticator>
   );
 }
 

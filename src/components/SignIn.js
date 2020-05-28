@@ -5,7 +5,7 @@ import { AmplifySignIn } from "@aws-amplify/ui-react";
 export const SignIn = () => {
   return (
     <div>
-      <AmplifySignIn />;
+      <AmplifySignIn slot="sign-in" />;
     </div>
   );
 };

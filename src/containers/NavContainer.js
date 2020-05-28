@@ -1,18 +1,15 @@
 import { connect } from "react-redux";
 import NavDrawer from "../components/NavDrawer";
-import { getProfileInjector } from "../actions/getUserProfileActions";
 
-// const mapStateToProps = (state) => {
+// const mapStateToProps = (ownProps) => {
 //   return {
-//     firstname: state.getUserProfileReducer.profile.firstname,
-//     lastname: state.getUserProfileReducer.profile.lastname,
-//     avatar: state.getUserProfileReducer.profile.avatar,
+//     setIsProfile: ownProps.setIsProfile,
 //   };
 // };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    boundLoadProfile: getProfileInjector(dispatch),
+    boundLogOut: () => dispatch({ type: "LOGOUT" }),
   };
 };
 

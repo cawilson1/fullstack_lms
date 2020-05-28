@@ -5,7 +5,7 @@ import {
 } from "../actions/getUserProfileActions";
 
 export const getUserProfileReducer = (
-  state = { profile: [], status: null },
+  state = { profile: {}, status: null },
   action
 ) => {
   switch (action.type) {
@@ -23,7 +23,7 @@ export const getUserProfileReducer = (
     case GET_PROFILE_ERROR:
       return {
         ...state,
-        profile: [],
+        profile: {},
         status: action.type,
       };
     default:
