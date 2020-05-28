@@ -17,6 +17,8 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
 
   let dataInput, urlInput, urlTitleInput, urlDescriptionInput;
 
+  console.log("FILE FROM RESORCE", file);
+
   return (
     <>
       <form

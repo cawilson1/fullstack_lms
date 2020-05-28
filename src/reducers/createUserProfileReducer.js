@@ -11,7 +11,7 @@ const initialState = {
   email: "",
   bio: "",
   github: "",
-  avatar: "",
+  file: "",
   status: null,
 };
 
@@ -26,7 +26,7 @@ export const createUserProfileReducer = (state = initialState, action) => {
         email: action.email,
         bio: action.bio,
         github: action.github,
-        avatar: action.avatar,
+        file: action.file ? action.file : "",
       };
     case CREATE_PROFILE_SUCCESS:
       return {
@@ -37,7 +37,7 @@ export const createUserProfileReducer = (state = initialState, action) => {
         email: "",
         bio: "",
         github: "",
-        avatar: "",
+        file: "",
         status: action.type,
       };
     case CREATE_PROFILE_ERROR:
@@ -49,7 +49,7 @@ export const createUserProfileReducer = (state = initialState, action) => {
         email: "",
         bio: "",
         github: "",
-        avatar: "",
+        profilePic: "",
         status: action.type,
       };
     default:

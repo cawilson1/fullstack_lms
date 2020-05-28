@@ -4,7 +4,7 @@ import { navigate } from "@reach/router";
 
 const UserProfileInput = ({ boundUserCreateProfile }) => {
   const [username, setUsername] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [file, setFile] = useState("");
 
   useEffect(() => {
     const getUsername = async () => {
@@ -16,6 +16,8 @@ const UserProfileInput = ({ boundUserCreateProfile }) => {
   }, []);
 
   let firstnameInput, lastnameInput, emailInput, bioInput, githubInput;
+
+  console.log("UserProfileInput component image", file);
 
   return (
     <div>
@@ -31,7 +33,7 @@ const UserProfileInput = ({ boundUserCreateProfile }) => {
               email: emailInput.value,
               bio: bioInput.value,
               github: githubInput.value,
-              avatar: avatar,
+              file: file ? file : "",
             }));
           await navigate("/");
         }}
@@ -86,7 +88,7 @@ const UserProfileInput = ({ boundUserCreateProfile }) => {
           accept="image/*"
           id="s3-avatar"
           onChange={(e) => {
-            setAvatar(e.target.files[0].name);
+            setFile(e.target.files[0]);
           }}
         />
         <button type="submit">Submit</button>
