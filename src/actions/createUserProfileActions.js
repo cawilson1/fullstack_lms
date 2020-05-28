@@ -27,12 +27,8 @@ const createProfileError = () => {
 };
 
 const attemptCreateProfileRequest = async (dispatch, profile) => {
-  console.log("Profile top level action", profile);
   dispatch(createProfileRequest(profile));
   try {
-    console.log("profile.file incoming to action", profile.file);
-    console.log("profile.file.name incoming to action", profile.file.name);
-
     let imageResponse = "";
     if (profile.file !== "") {
       let extension = profile.file.name.split(".")[1];
@@ -41,7 +37,6 @@ const attemptCreateProfileRequest = async (dispatch, profile) => {
         contentType: "image/png",
       });
     }
-    console.log("imageResponse", imageResponse);
     let profileToCreate = {
       username: profile.username,
       firstname: profile.firstname,
@@ -51,7 +46,6 @@ const attemptCreateProfileRequest = async (dispatch, profile) => {
       github: profile.github,
       avatar: imageResponse === "" ? "" : imageResponse.key.split("/")[1],
     };
-    console.log("Profile to Create", profileToCreate);
     await axios({
       method: "post",
       url:
@@ -61,7 +55,6 @@ const attemptCreateProfileRequest = async (dispatch, profile) => {
         "Content-Type": "application/json",
       },
     }).then((response) => {
-      console.log("Response on Actions", response);
       dispatch(createProfileSuccess());
       navigate("profile");
     });

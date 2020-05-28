@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Auth } from "aws-amplify";
+import { Auth, Storage } from "aws-amplify";
 
 export const GET_PROFILE_REQUEST = "GET_PROFILE_REQUEST";
 export const GET_PROFILE_SUCCESS = "GET_PROFILE_SUCCESS";
@@ -11,10 +11,11 @@ const getProfileRequest = () => {
   };
 };
 
-const getProfileSuccess = (response) => {
+const getProfileSuccess = (profileResponse, s3Avatar) => {
   return {
     type: GET_PROFILE_SUCCESS,
-    profile: response,
+    profile: profileResponse,
+    s3Avatar: s3Avatar,
   };
 };
 
@@ -26,21 +27,20 @@ const getProfileError = () => {
 
 export const attemptGetProfile = async (dispatch) => {
   dispatch(getProfileRequest());
-  // console.log("from the actions 1");
-
   try {
-    // console.log("from the actions 2");
-
     const getUsername = await Auth.currentUserInfo();
     const username = getUsername.username;
-    // console.log("from the actions 3", username);
-
     const response = await axios({
       method: "get",
       url: `https://s9alxvtcob.execute-api.us-east-1.amazonaws.com/dev/user?username=${username}`,
     });
-    dispatch(getProfileSuccess(response.data[0][0]));
-    // console.log("from the actions 4");
+    const avatarUuid = response.data[0][0].avatar;
+    const s3Avatar = await Storage.get("test/" + avatarUuid, {
+      // level: "protected",
+      contentType: "image/png",
+    });
+    const profileResponse = response.data[0][0];
+    dispatch(getProfileSuccess(profileResponse, s3Avatar));
   } catch (error) {
     dispatch(getProfileError());
     console.error("GetProfileERR", error);
