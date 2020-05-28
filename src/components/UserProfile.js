@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import UpdateUserProfileContainer from "../containers/UpdateUserProfileContainer";
 import UserProfileInputContainer from "../containers/UserProfileInputContainer";
 import defaultAvatar from "../assets/avatar-png-transparent-4.png";
+import Button from "@material-ui/core/Button";
 
 const Profile = ({ s3Avatar, profile, isToggle, setIsToggle, linkGithub }) => {
   // console.log("UserProf component s3", s3Avatar);  **Is URL**
@@ -26,7 +27,16 @@ const Profile = ({ s3Avatar, profile, isToggle, setIsToggle, linkGithub }) => {
           {profile.github}
         </button>
         <p>Bio: {profile.bio}</p>
-        <button onClick={() => setIsToggle(!isToggle)}> Edit </button>
+        <Button
+          size="small"
+          style={styles.buttons}
+          variant="contained"
+          color="primary"
+          onClick={() => setIsToggle(!isToggle)}
+        >
+          {" "}
+          Edit{" "}
+        </Button>
       </div>
     </div>
   );
@@ -80,6 +90,9 @@ const styles = {
   },
   linkButton: {
     border: "none",
+  },
+  buttons: {
+    marginBottom: "10px",
   },
   avatar: {
     verticalAlign: "middle",

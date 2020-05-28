@@ -18,8 +18,11 @@ Amplify.configure(awsExports);
 const store = createStore(rootReducer, applyMiddleware(logger));
 
 const styles = {
-  NavCont: {
-    marginLeft: "35px",
+  navWrapper: {
+    justifyContent: "center",
+  },
+  navCont: {
+    justifyContent: "center",
   },
   universal: {
     display: "flex",
@@ -33,7 +36,9 @@ const styles = {
 
 ReactDOM.render(
   <Provider store={store}>
-    <NavContainer style={styles.NavCont} />
+    <div style={styles.NavWrapper}>
+      <NavContainer style={styles.navCont} />
+    </div>
     <App style={styles.universal} />
   </Provider>,
   document.getElementById("root")

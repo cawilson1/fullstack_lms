@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import UpdatePostContainer from "../containers/UpdatePostContainer";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
 
 const Post = ({
   post,
@@ -69,7 +70,6 @@ const Post = ({
               Delete Post
             </Button>
           </div>
-          <p>-------</p>
         </div>
       )}
     </div>

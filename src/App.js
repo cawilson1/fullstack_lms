@@ -53,7 +53,7 @@ const styles = {
   universal: {
     display: "flex",
     flexDirection: "column",
-    marginLeft: "10vw",
+    marginLeft: "60vw",
     marginRight: "10vw",
     marginTop: "10vw",
     justifyContent: "center",
