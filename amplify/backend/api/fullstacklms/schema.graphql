@@ -1,9 +1,6 @@
 type Resource
   @model
-  @auth(rules: 
-  [{ allow: owner, ownerField: "instructor" }], 
-  [{ allow: groups, groups: "admin" operations: [create, read, delete] }],
-  [{ allow: groups, groups: "user" operations: [read] }]) {
+  @auth(rules: [{ allow: owner, ownerField: "instructor" }]) {
   id: ID!
   instructor: String!
   data: String
@@ -15,12 +12,7 @@ type Resource
   updatedAt: AWSDateTime
 }
 
-type Post
-  @model
-  @auth(rules: 
-  [{ allow: owner, ownerField: "author"}], 
-  [{ allow: groups, groups: "admin" operations: [read, delete] }],
-  [{ allow: groups, groups: "user" operations: [read]}]) {
+type Post @model @auth(rules: [{ allow: owner, ownerField: "author" }]) {
   id: ID!
   author: String!
   data: String!

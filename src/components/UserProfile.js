@@ -37,9 +37,11 @@ const UserProfile = ({ s3Avatar, profile, status, boundGetUserProfile }) => {
   const linkGithub = () => {
     window.location.assign(profile.github);
   };
+
   useEffect(() => {
     boundGetUserProfile();
   }, []);
+
   return profile !== undefined ? (
     status === "GET_PROFILE_SUCCESS" ? (
       isToggle ? (

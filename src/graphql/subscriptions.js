@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateResource = /* GraphQL */ `
-  subscription OnCreateResource {
-    onCreateResource {
+  subscription OnCreateResource($instructor: String!) {
+    onCreateResource(instructor: $instructor) {
       id
       instructor
       data
@@ -17,8 +17,8 @@ export const onCreateResource = /* GraphQL */ `
   }
 `;
 export const onUpdateResource = /* GraphQL */ `
-  subscription OnUpdateResource {
-    onUpdateResource {
+  subscription OnUpdateResource($instructor: String!) {
+    onUpdateResource(instructor: $instructor) {
       id
       instructor
       data
@@ -32,8 +32,8 @@ export const onUpdateResource = /* GraphQL */ `
   }
 `;
 export const onDeleteResource = /* GraphQL */ `
-  subscription OnDeleteResource {
-    onDeleteResource {
+  subscription OnDeleteResource($instructor: String!) {
+    onDeleteResource(instructor: $instructor) {
       id
       instructor
       data
@@ -47,8 +47,8 @@ export const onDeleteResource = /* GraphQL */ `
   }
 `;
 export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
+  subscription OnCreatePost($author: String!) {
+    onCreatePost(author: $author) {
       id
       author
       data
@@ -59,8 +59,8 @@ export const onCreatePost = /* GraphQL */ `
   }
 `;
 export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
+  subscription OnUpdatePost($author: String!) {
+    onUpdatePost(author: $author) {
       id
       author
       data
@@ -71,8 +71,8 @@ export const onUpdatePost = /* GraphQL */ `
   }
 `;
 export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
+  subscription OnDeletePost($author: String!) {
+    onDeletePost(author: $author) {
       id
       author
       data

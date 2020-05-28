@@ -26,7 +26,7 @@ const styles = {
     flexDirection: "column",
     marginLeft: "10vw",
     marginRight: "10vw",
-    marginTop: "10vw",
+    marginTop: "70px",
     justifyContent: "center",
   },
 };
