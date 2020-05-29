@@ -2,8 +2,6 @@ import { deleteResource } from "../graphql/mutations";
 import { API, graphqlOperation } from "aws-amplify";
 import { Storage } from "aws-amplify";
 
-import { onDeleteResource } from "../graphql/subscriptions";
-
 export const DELETE_RESOURCE_SUCCESS = "DELETE_RESOURCE_SUCCESS";
 export const DELETE_RESOURCE_ERROR = "DELETE_RESOURCE_ERROR";
 export const DELETE_RESOURCE_REQUEST = "DELETE_RESOURCE_REQUEST";

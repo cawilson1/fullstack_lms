@@ -17,8 +17,6 @@ const ResourceList = ({
 }) => {
   const [isRender, setIsRender] = useState(false);
 
-  console.log("Resources, maybe we can see sort", resources);
-
   useEffect(() => {
     boundAttemptGetResources();
   }, []);
@@ -28,10 +26,10 @@ const ResourceList = ({
       graphqlOperation(onCreateResource)
     ).subscribe({
       next: (response) => {
-        console.log(
-          "onCreate Subscription",
-          response.value.data.onCreateResource
-        );
+        // console.log(
+        //   "onCreate Subscription",
+        //   response.value.data.onCreateResource
+        // );
         boundAttemptGetResources();
       },
     });
@@ -43,10 +41,10 @@ const ResourceList = ({
       graphqlOperation(onUpdateResource)
     ).subscribe({
       next: (response) => {
-        console.log(
-          "Update subscription",
-          response.value.data.onUpdateResource
-        );
+        // console.log(
+        //   "Update subscription",
+        //   response.value.data.onUpdateResource
+        // );
         boundAttemptGetResources();
       },
     });
@@ -58,10 +56,10 @@ const ResourceList = ({
       graphqlOperation(onDeleteResource)
     ).subscribe({
       next: (response) => {
-        console.log(
-          "Delete subscription",
-          response.value.data.onDeleteResource
-        );
+        // console.log(
+        //   "Delete subscription",
+        //   response.value.data.onDeleteResource
+        // );
         boundAttemptGetResources();
       },
     });

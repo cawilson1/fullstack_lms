@@ -5,6 +5,7 @@ import UserProfile from "../components/UserProfile";
 const mapStateToProps = (state) => {
   return {
     profile: state.getUserProfileReducer.profile,
+    s3Avatar: state.getUserProfileReducer.s3Avatar,
     status: state.getUserProfileReducer.status,
   };
 };

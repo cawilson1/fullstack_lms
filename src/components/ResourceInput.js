@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { navigate } from "@reach/router";
 import { Auth } from "aws-amplify";
+import Button from "@material-ui/core/Button";
 
 const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
   const [file, setFile] = useState("");
@@ -16,6 +16,8 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
   }, []);
 
   let dataInput, urlInput, urlTitleInput, urlDescriptionInput;
+
+  console.log("FILE FROM RESORCE", file);
 
   return (
     <>
@@ -38,47 +40,52 @@ const ResourceInput = ({ boundCreateResource, boundS3CreateResource }) => {
             });
         }}
       >
-        <h3>Resource Input Here</h3>
-        <h4>Type of Resource:</h4>
-        <div>
-          <label htmlFor="addUrl">Add a link</label>
-          <input type="radio" name="url" value="addUrl" />
-          <label htmlFor="addAttachment">Add an attachment</label>
-          <input type="radio" name="attachment" value="addAttachment" />
-          <label htmlFor="addCodeSnippet">Add code snippet</label>
-          <input type="radio" name="snippet" value="addCodeSnippet" />
-        </div>
+        <h4>Add a Resource for Students</h4>
+        <label htmlFor="data">Body of Post:</label>
         <textarea
           id="data"
           type="text"
           placeholder="Input data"
           ref={(node) => (dataInput = node)}
+          style={styles.textarea}
         ></textarea>
+        <label htmlFor="url">URL of Online Resource</label>
         <input
           id="url"
           type="text"
           placeholder="Input url"
           ref={(node) => (urlInput = node)}
+          style={styles.inputs}
         />
+        <label htmlFor="urlTitle">Title of Online Resource:</label>
+
         <input
           id="urlTitle"
           type="text"
           placeholder="Input url title"
           ref={(node) => (urlTitleInput = node)}
+          style={styles.inputs}
         />
+        <label htmlFor="urlDescription">Summary of Online Resource:</label>
+
         <input
           id="urlDescription"
           type="text"
           placeholder="Input url description"
           ref={(node) => (urlDescriptionInput = node)}
+          style={styles.inputs}
         />
+
         <input
           type="file"
           accept="image/*, .pdf, .txt, .doc, .docx, .json"
           id="s3-resource"
           onChange={(e) => setFile(e.target.files[0])}
+          style={styles.inputs}
         />
-        <button type="submit">Submit Resource</button>
+        <Button size="small" variant="contained" color="primary" type="submit">
+          Submit Resource
+        </Button>
       </form>
     </>
   );
@@ -91,5 +98,27 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  inputs: {
+    width: 250,
+    marginBottom: 10,
+    marginTop: 4,
+    borderRadius: 8,
+    border: "1px solid black",
+    boxShadow: "inset 0px 0px 1.5px 1.5px gray",
+    padding: 10,
+    fontFamily: "sans-serif",
+  },
+  textarea: {
+    width: 250,
+    margin: 20,
+    height: 100,
+    borderRadius: 8,
+    marginBottom: 10,
+    marginTop: 4,
+    border: "1px solid black",
+    boxShadow: "inset 0px 0px 1.5px 1.5px gray",
+    padding: 10,
+    fontFamily: "sans-serif",
   },
 };

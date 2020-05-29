@@ -1,3 +1,17 @@
+:root {
+  --amplify-primary-color: green;
+  --amplify-primary-tint: rgb(113, 175, 113);
+  --amplify-primary-shade: rgb(82, 159, 165);
+}
+
+element.style {
+  display: flex;
+  flex-direction: column;
+  margin-left: 200px;
+  margin-right: 10vw;
+  margin-top: 70px;
+}
+
 .App {
   text-align: center;
 }

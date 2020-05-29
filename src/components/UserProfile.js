@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
+
 import UpdateUserProfileContainer from "../containers/UpdateUserProfileContainer";
+import UserProfileInputContainer from "../containers/UserProfileInputContainer";
 import defaultAvatar from "../assets/avatar-png-transparent-4.png";
+import Button from "@material-ui/core/Button";
 
-const UserProfile = ({ profile, status, boundGetUserProfile }) => {
-  const [isToggle, setIsToggle] = useState(true);
-
-  const linkGithub = () => {
-    window.location.assign(profile.github);
-  };
-
-  useEffect(() => {
-    boundGetUserProfile();
-  }, []);
-
-  return status === "GET_PROFILE_SUCCESS" ? (
-    isToggle ? (
+const Profile = ({ s3Avatar, profile, isToggle, setIsToggle, linkGithub }) => {
+  // console.log("UserProf component s3", s3Avatar);  **Is URL**
+  return (
+    <div style={styles.profileMaster}>
       <div style={styles.profileCard}>
         <h3> User Profile Info for {profile.username} </h3>
         {profile.avatar === "" ? (
@@ -23,7 +17,7 @@ const UserProfile = ({ profile, status, boundGetUserProfile }) => {
           </div>
         ) : (
           <div>
-            <img src={profile.avatar} style={styles.avatar} />
+            <img src={s3Avatar} style={styles.avatar} />
           </div>
         )}
         <p>First: {profile.firstname}</p>
@@ -33,21 +27,60 @@ const UserProfile = ({ profile, status, boundGetUserProfile }) => {
           {profile.github}
         </button>
         <p>Bio: {profile.bio}</p>
-        <button onClick={() => setIsToggle(!isToggle)}> Edit </button>
+        <Button
+          size="small"
+          style={styles.buttons}
+          variant="contained"
+          color="primary"
+          onClick={() => setIsToggle(!isToggle)}
+        >
+          {" "}
+          Edit{" "}
+        </Button>
       </div>
-    ) : (
-      <UpdateUserProfileContainer
-        profile={profile}
-        isToggle={isToggle}
-        setIsToggle={setIsToggle}
-      />
-    )
-  ) : (
-    <p>Loading</p>
+    </div>
   );
 };
 
+const UserProfile = ({ s3Avatar, profile, status, boundGetUserProfile }) => {
+  const [isToggle, setIsToggle] = useState(true);
+  const linkGithub = () => {
+    window.location.assign(profile.github);
+  };
+
+  useEffect(() => {
+    boundGetUserProfile();
+  }, []);
+
+  return profile !== undefined ? (
+    status === "GET_PROFILE_SUCCESS" ? (
+      isToggle ? (
+        <Profile
+          isToggle={isToggle}
+          setIsToggle={setIsToggle}
+          linkGithub={linkGithub}
+          profile={profile}
+          s3Avatar={s3Avatar}
+        />
+      ) : (
+        <UpdateUserProfileContainer
+          profile={profile}
+          isToggle={isToggle}
+          setIsToggle={setIsToggle}
+        />
+      )
+    ) : (
+      <p>Loading</p>
+    )
+  ) : (
+    <UserProfileInputContainer profile={profile} />
+  );
+};
 const styles = {
+  profileMaster: {
+    display: "flex",
+    justifyContent: "center",
+  },
   profileCard: {
     boxShadow: "0 4px 8px 0 silver",
     transition: "0.3s",
@@ -58,6 +91,9 @@ const styles = {
   linkButton: {
     border: "none",
   },
+  buttons: {
+    marginBottom: "10px",
+  },
   avatar: {
     verticalAlign: "middle",
     width: "200px",
@@ -65,8 +101,6 @@ const styles = {
     borderRadius: "50%",
     border: "2px solid black",
     margin: "auto",
-    // background: `url(${defaultAvatar})`,
   },
 };
-
 export default UserProfile;

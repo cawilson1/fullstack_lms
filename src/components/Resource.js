@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UpdateResourceContainer from "../containers/UpdateResourceContainer";
+import Button from "@material-ui/core/Button";
+
 import { S3Image } from "aws-amplify-react";
 
 const Resource = ({
@@ -47,11 +49,12 @@ const Resource = ({
           isToggleUpdate={isToggleUpdate}
         />
       ) : (
-        <div>
+        <div style={styles.resourceLayout}>
           <h4>Resource Start</h4>
-          <p>{resource.instructor}</p>
+          <p>
+            Added by {resource.instructor} on {adjustedDate(resource.createdAt)}{" "}
+          </p>
           <p>{resource.data}</p>
-          <p>Added {adjustedDate(resource.createdAt)}</p>
           {resource.createdAt == resource.updatedAt ? (
             <></>
           ) : (
@@ -69,17 +72,29 @@ const Resource = ({
               <></>
             )}
           </div>
-          <button
-            onClick={async () => {
-              await boundAttemptDeleteResource(resource.id, s3);
-              await setIsRender(!isRender);
-            }}
-          >
-            Delete Resource
-          </button>
-          <button onClick={() => setIsToggleUpdate(!isToggleUpdate)}>
-            Update Resource{" "}
-          </button>
+          <div style={styles.buttonWrapper}>
+            <Button
+              size="small"
+              style={styles.buttons}
+              variant="contained"
+              color="primary"
+              onClick={async () => {
+                await boundAttemptDeleteResource(resource.id, s3);
+                await setIsRender(!isRender);
+              }}
+            >
+              Delete Resource
+            </Button>
+            <Button
+              size="small"
+              style={styles.buttons}
+              variant="contained"
+              color="secondary"
+              onClick={() => setIsToggleUpdate(!isToggleUpdate)}
+            >
+              Update Resource{" "}
+            </Button>
+          </div>
           <p>-------</p>
         </div>
       )}
@@ -87,3 +102,18 @@ const Resource = ({
   );
 };
 export default Resource;
+
+const styles = {
+  resourceLayout: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  buttonWrapper: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  buttons: {
+    margin: "10px",
+  },
+};

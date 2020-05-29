@@ -32,7 +32,6 @@ const attemptGetPosts = async (dispatch) => {
     const response = await API.graphql(graphqlOperation(listPosts));
     const sortedPosts = sortByDate(response.data.listPosts.items);
     dispatch(getPostsSuccess(sortedPosts));
-    // console.log("Get Posts Success", response.data.listPosts.items);
   } catch (error) {
     dispatch(getPostsError());
     console.error("Get Posts ERR", error);

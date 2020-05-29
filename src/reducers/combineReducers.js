@@ -15,7 +15,7 @@ import { updateResourceReducer } from "./updateResourceReducer";
 import { updatePostReducer } from "./updatePostReducer";
 import { updateUserProfileReducer } from "./updateUserProfileReducer";
 
-export const rootReducer = combineReducers({
+const appReducer = combineReducers({
   createResourceReducer,
   getResourcesReducer,
   deleteResourceReducer,
@@ -28,3 +28,11 @@ export const rootReducer = combineReducers({
   updateUserProfileReducer,
   deletePostReducer,
 });
+
+// state=undefined per Redux principles supposed to reset all state trees to Initial State
+export const rootReducer = (state, action) => {
+  if (action.type === "LOGOUT") {
+    state = undefined;
+  }
+  return appReducer(state, action);
+};

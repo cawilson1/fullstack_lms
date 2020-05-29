@@ -1,21 +1,12 @@
 import { connect } from "react-redux";
-import Nav from "../components/Nav";
-import { getProfileInjector } from "../actions/getUserProfileActions";
-
-const mapStateToProps = (state) => {
-  return {
-    firstname: state.getUserProfileReducer.profile.firstname,
-    lastname: state.getUserProfileReducer.profile.lastname,
-    avatar: state.getUserProfileReducer.profile.avatar,
-  };
-};
+import NavDrawer from "../components/NavDrawer";
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    boundLoadProfile: getProfileInjector(dispatch),
+    boundLogOut: () => dispatch({ type: "LOGOUT" }),
   };
 };
 
-const NavContainer = connect(mapStateToProps, mapDispatchToProps)(Nav);
+const NavContainer = connect(null, mapDispatchToProps)(NavDrawer);
 
 export default NavContainer;

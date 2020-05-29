@@ -23,7 +23,7 @@ const PostsList = ({
   useEffect(() => {
     const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
       next: (response) => {
-        console.log("create subscription", response.value.data.onCreatePost);
+        // console.log("create subscription", response.value.data.onCreatePost);
         boundAttemptGetPosts();
       },
     });
@@ -33,7 +33,7 @@ const PostsList = ({
   useEffect(() => {
     const subscription = API.graphql(graphqlOperation(onUpdatePost)).subscribe({
       next: (response) => {
-        console.log("Update subscription", response.value.data.onUpdatePost);
+        // console.log("Update subscription", response.value.data.onUpdatePost);
         boundAttemptGetPosts();
       },
     });
@@ -43,7 +43,7 @@ const PostsList = ({
   useEffect(() => {
     const subscription = API.graphql(graphqlOperation(onDeletePost)).subscribe({
       next: (response) => {
-        console.log("Delete subscription", response.value.data.onDeletePost);
+        // console.log("Delete subscription", response.value.data.onDeletePost);
         boundAttemptGetPosts();
       },
     });

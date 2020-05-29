@@ -32,10 +32,9 @@ const attemptGetResources = async (dispatch) => {
   dispatch(getResourcesRequest());
   try {
     const s3Resources = await Storage.list("test/", {
-      level: "public",
+      // level: "protected",
       contentType: "image/png",
     });
-    console.log("getS3ActionsResponse", s3Resources);
     const response = await API.graphql(
       graphqlOperation(listResources, {
         limit: 20,
